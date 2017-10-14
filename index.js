@@ -6,6 +6,7 @@
 // load manifests
 // scripts
 import 'bootstrap'
+import 'bootstrap-notify'
 require('./assets/scripts/index.js')
 
 // styles

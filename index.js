@@ -5,6 +5,7 @@
 
 // load manifests
 // scripts
+import 'bootstrap'
 require('./assets/scripts/index.js')
 
 // styles

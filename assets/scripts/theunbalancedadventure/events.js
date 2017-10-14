@@ -27,18 +27,26 @@ const onChangePassword = function (event) {
     .catch(ui.onChangePasswordFailure)
 }
 
+const onSignUp = function (event) {
+  event.preventDefault()
+  const formData = getFormFields(event.target)
+  api.signUp(formData)
+    .then(ui.onSignUpSuccess)
+    .catch(ui.onSignUpFailure)
+}
+
 const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
 
 const registerHandlers = function () {
   $('#signIn').on('submit', onSignIn)
-  // $('#signUp').on('submit', onSignUp)
+  $('#signUp').on('submit', onSignUp)
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
-  $('#signOutModal').on('hidden.bs.modal', clearModalFormOnHide)
+  $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
 }
 

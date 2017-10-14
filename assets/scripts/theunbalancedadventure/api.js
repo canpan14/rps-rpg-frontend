@@ -32,8 +32,17 @@ const changePassword = function (formData) {
   })
 }
 
+const signUp = function (formData) {
+  return $.ajax({
+    url: config.apiOrigin + 'sign-up',
+    method: 'POST',
+    data: formData
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
-  changePassword
+  changePassword,
+  signUp
 }

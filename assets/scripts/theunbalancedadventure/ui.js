@@ -37,6 +37,15 @@ const onChangePasswordFailure = function () {
   redNotification('Old or new password is invalid')
 }
 
+const onSignUpSuccess = function () {
+  $('#signUpModal').modal('hide')
+  greenNotification('Signed up successfully', 1500)
+}
+
+const onSignUpFailure = function () {
+  redNotification('Email is in use or passwords didn\'t match')
+}
+
 const clearModalFormOnHide = function (event) {
   $(event.target).find('form')[0].reset()
 }
@@ -88,5 +97,7 @@ module.exports = {
   onSignOutFailure,
   onChangePasswordSuccess,
   onChangePasswordFailure,
+  onSignUpSuccess,
+  onSignUpFailure,
   clearModalFormOnHide
 }

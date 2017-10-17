@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('../store')
+const advRowHandleBar = require('../templates/adventurerRow.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -9,6 +10,7 @@ const onSignInSuccess = function (response) {
   $('.activeBeforeSignIn').hide()
   $('.activeAfterSignIn').show()
   $('#createAdventurerBtn').attr('disabled', false)
+  $('#viewAdventurers').attr('disabled', false)
 }
 
 const onSignInFailure = function () {
@@ -21,6 +23,7 @@ const onSignOutSuccess = function () {
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
   $('#createAdventurerBtn').attr('disabled', true)
+  $('#viewAdventurers').attr('disabled', true)
 }
 
 const onSignOutFailure = function () {
@@ -52,6 +55,16 @@ const onCreateAdventurerSuccess = function (response) {
 
 const onCreateAdventurerFailure = function (error) {
   redNotification('You cannot have two living adventurers with the same name')
+  console.log(error)
+}
+
+const onViewAdventurersSuccess = function (response) {
+  $('#myAdventurers tbody tr').remove()
+  $('#myAdventurers tbody').append(advRowHandleBar(response))
+  $('#myAdventurers').css('display', 'table')
+}
+
+const onViewAdventurersFailure = function (error) {
   console.log(error)
 }
 
@@ -110,5 +123,7 @@ module.exports = {
   onSignUpFailure,
   onCreateAdventurerSuccess,
   onCreateAdventurerFailure,
+  onViewAdventurersSuccess,
+  onViewAdventurersFailure,
   clearModalFormOnHide
 }

@@ -43,6 +43,13 @@ const onCreateAdventurer = function (event) {
     .catch(ui.onCreateAdventurerFailure)
 }
 
+const onViewAdventurers = function (event) {
+  event.preventDefault()
+  api.viewAdventurers()
+    .then(ui.onViewAdventurersSuccess)
+    .catch(ui.onViewAdventurersFailure)
+}
+
 const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
@@ -53,6 +60,7 @@ const registerHandlers = function () {
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
+  $('#viewAdventurers').on('click', onViewAdventurers)
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)

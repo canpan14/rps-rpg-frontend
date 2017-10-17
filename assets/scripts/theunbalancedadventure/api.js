@@ -51,10 +51,21 @@ const createAdventurer = function (formData) {
   })
 }
 
+const viewAdventurers = function () {
+  return $.ajax({
+    url: config.apiOrigin + 'adventurers',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
   changePassword,
   signUp,
-  createAdventurer
+  createAdventurer,
+  viewAdventurers
 }

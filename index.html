@@ -36,9 +36,25 @@
         </div>
       </nav>
 
+      <!-- Temporary UI for testing -->
       <div class="d-flex flex-row justify-content-center">
         <button class="btn btn-primary p-2" id="createAdventurerBtn" data-toggle="modal" data-target="#createAdventurerModal" disabled>Create a New Adventurer</button>
+        <button class="btn btn-secondary p-2" id="viewAdventurers" disabled>View My Adventurers</button>
       </div class="row">
+      <div class="table-responsive">
+        <table class="table" id="myAdventurers" style="display: none">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Data Created</th>
+            </tr>
+          </thead>
+          <tbody>
+          </tbody>
+        </table>
+      </div>
+      <!-- End Temp UI -->
 
       <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">

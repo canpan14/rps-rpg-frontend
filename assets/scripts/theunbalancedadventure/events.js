@@ -35,6 +35,14 @@ const onSignUp = function (event) {
     .catch(ui.onSignUpFailure)
 }
 
+const onCreateAdventurer = function (event) {
+  event.preventDefault()
+  const formData = getFormFields(event.target)
+  api.createAdventurer(formData)
+    .then(ui.onCreateAdventurerSuccess)
+    .catch(ui.onCreateAdventurerFailure)
+}
+
 const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
@@ -44,10 +52,12 @@ const registerHandlers = function () {
   $('#signUp').on('submit', onSignUp)
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
+  $('#createAdventurer').on('submit', onCreateAdventurer)
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
+  $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 }
 
 module.exports = {

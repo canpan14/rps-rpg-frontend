@@ -8,6 +8,7 @@ const onSignInSuccess = function (response) {
   store.user = response.user
   $('.activeBeforeSignIn').hide()
   $('.activeAfterSignIn').show()
+  $('#createAdventurerBtn').attr('disabled', false)
 }
 
 const onSignInFailure = function () {
@@ -19,13 +20,11 @@ const onSignOutSuccess = function () {
   delete store.user
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
+  $('#createAdventurerBtn').attr('disabled', true)
 }
 
 const onSignOutFailure = function () {
-  greenNotification('Signed out successfully')
-  delete store.user
-  $('.activeAfterSignIn').hide()
-  $('.activeBeforeSignIn').show()
+  onSignOutSuccess()
 }
 
 const onChangePasswordSuccess = function () {
@@ -44,6 +43,16 @@ const onSignUpSuccess = function () {
 
 const onSignUpFailure = function () {
   redNotification('Email is in use or passwords didn\'t match')
+}
+
+const onCreateAdventurerSuccess = function (response) {
+  $('#createAdventurerModal').modal('hide')
+  greenNotification('Adventurer created')
+}
+
+const onCreateAdventurerFailure = function (error) {
+  redNotification('You cannot have two living adventurers with the same name')
+  console.log(error)
 }
 
 const clearModalFormOnHide = function (event) {
@@ -99,5 +108,7 @@ module.exports = {
   onChangePasswordFailure,
   onSignUpSuccess,
   onSignUpFailure,
+  onCreateAdventurerSuccess,
+  onCreateAdventurerFailure,
   clearModalFormOnHide
 }

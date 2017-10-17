@@ -40,9 +40,21 @@ const signUp = function (formData) {
   })
 }
 
+const createAdventurer = function (formData) {
+  return $.ajax({
+    url: config.apiOrigin + 'adventurers',
+    method: 'POST',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: formData
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
   changePassword,
-  signUp
+  signUp,
+  createAdventurer
 }

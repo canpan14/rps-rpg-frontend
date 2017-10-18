@@ -59,6 +59,7 @@ const onCreateAdventurerFailure = function (error) {
 }
 
 const onViewAdventurersSuccess = function (response) {
+  console.log(response)
   $('#myAdventurers tbody tr').remove()
   $('#myAdventurers tbody').append(advRowHandleBar(response))
   $('#myAdventurers').css('display', 'table')

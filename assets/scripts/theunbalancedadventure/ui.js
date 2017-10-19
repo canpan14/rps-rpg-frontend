@@ -1,7 +1,8 @@
 'use strict'
 
 const store = require('../store')
-const advRowHandleBar = require('../templates/adventurerRow.handlebars')
+const advRowHandlebar = require('../templates/adventurerRow.handlebars')
+const encounterHandlebar = require('../templates/encounter.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -61,12 +62,25 @@ const onCreateAdventurerFailure = function (error) {
 const onViewAdventurersSuccess = function (response) {
   console.log(response)
   $('#myAdventurers tbody tr').remove()
-  $('#myAdventurers tbody').append(advRowHandleBar(response))
+  $('#myAdventurers tbody').append(advRowHandlebar(response))
   $('#myAdventurers').css('display', 'table')
 }
 
 const onViewAdventurersFailure = function (error) {
   console.log(error)
+}
+
+const onShowAdventurerSuccess = function (response) {
+  greenNotification('Beginning adventure with ' + response.adventurer.name)
+}
+
+const onShowAdventurerFailure = function (error) {
+  console.log(error)
+}
+
+const updateEncounter = function (enemy) {
+  console.log(enemy)
+  $('#encounterInfo').append(encounterHandlebar(enemy))
 }
 
 const clearModalFormOnHide = function (event) {
@@ -126,5 +140,8 @@ module.exports = {
   onCreateAdventurerFailure,
   onViewAdventurersSuccess,
   onViewAdventurersFailure,
+  onShowAdventurerSuccess,
+  onShowAdventurerFailure,
+  updateEncounter,
   clearModalFormOnHide
 }

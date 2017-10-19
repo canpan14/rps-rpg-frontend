@@ -61,11 +61,33 @@ const viewAdventurers = function () {
   })
 }
 
+const showAdventurer = function (advId) {
+  return $.ajax({
+    url: config.apiOrigin + 'adventurers/' + advId,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
+const viewEnemies = function () {
+  return $.ajax({
+    url: config.apiOrigin + 'enemies',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
   changePassword,
   signUp,
   createAdventurer,
-  viewAdventurers
+  viewAdventurers,
+  showAdventurer,
+  viewEnemies
 }

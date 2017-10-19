@@ -3,6 +3,7 @@
 const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
+const gameController = require('./gameController')
 
 const onSignIn = function (event) {
   event.preventDefault()
@@ -50,6 +51,18 @@ const onViewAdventurers = function (event) {
     .catch(ui.onViewAdventurersFailure)
 }
 
+const onStartGameWithAdventurer = function (event) {
+  event.preventDefault()
+  const advId = $(this).serialize().split('=')[1]
+  api.showAdventurer(advId)
+    .then((response) => {
+      ui.onShowAdventurerSuccess(response)
+      return response
+    })
+    .then(gameController.startGame)
+    .catch(ui.onShowAdventurerFailure)
+}
+
 const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
@@ -61,6 +74,7 @@ const registerHandlers = function () {
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
   $('#viewAdventurers').on('click', onViewAdventurers)
+  $('#startGameForm').on('submit', onStartGameWithAdventurer)
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)

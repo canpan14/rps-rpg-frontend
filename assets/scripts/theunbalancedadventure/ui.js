@@ -24,6 +24,7 @@ const onSignOutSuccess = function () {
   delete store.user
   $('#encounterInfo').empty()
   $('#roundResult').empty()
+  $('#endRoundMessage').empty()
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
   $('#createAdventurerBtn').attr('disabled', true)
@@ -94,6 +95,10 @@ const updateAdventurerInfo = function (adv) {
   $('#advInfo').append(adventurerInfoHandlebar(adv))
 }
 
+const updateEndRoundMessage = function (text) {
+  $('#endRoundMessage').text(text)
+}
+
 const clearModalFormOnHide = function (event) {
   $(event.target).find('form')[0].reset()
 }
@@ -156,5 +161,6 @@ module.exports = {
   updateEncounter,
   updateRoundResult,
   updateAdventurerInfo,
+  updateEndRoundMessage,
   clearModalFormOnHide
 }

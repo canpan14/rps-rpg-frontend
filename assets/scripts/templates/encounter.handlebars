@@ -1,7 +1,10 @@
-
-<span><strong>{{name}}</strong></span>
-<span><strong>Level: {{level}}</strong></span>
-<br>
-<span><strong>Attack: {{attack}}</strong></span>
-<br>
-<span><strong>Health: {{health}}</strong></span>
+<div class="card text-white bg-danger mb-3" style="width: 15rem">
+  <div class="card-body">
+    <h4 class="card-title">{{name}}</h4>
+    <h6 class="card-subtitle mb-2">Level: {{level}}</h6>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item list-group-item-danger">Attack: {{attack}}</li>
+      <li class="list-group-item list-group-item-danger">Health: {{health}}</li>
+    </ul>
+  </div>
+</div>

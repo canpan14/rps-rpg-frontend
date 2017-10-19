@@ -8,6 +8,7 @@ const Adventurer = require('./adventurer')
 let currentAdventurer
 let currentEnemy
 let roundResultText
+let fightOver = true
 
 const startGame = function (advInfo) {
   // load in adv info where needed
@@ -20,6 +21,9 @@ const startGame = function (advInfo) {
 }
 
 const newEncounter = function () {
+  fightOver = false
+  ui.updateEndRoundMessage('')
+
   api.viewEnemies()
     .then((enemies) => {
       enemies = enemies.enemies
@@ -36,6 +40,10 @@ const playerAction = function (moveChoice) {
   // Update player choice stats (future)
   // Resolve depending on result
   // End encounter/kill player if player/enemy health hits 0 or below
+  if (fightOver) {
+    return
+  }
+
   const enemyChoice = enemyAction()
   switch (roundResult(moveChoice, enemyChoice)) {
     case 'player':
@@ -47,6 +55,13 @@ const playerAction = function (moveChoice) {
     case 'draw':
       drawRound()
       break
+  }
+  if (currentEnemy.health <= 0) {
+    fightOver = true
+    ui.updateEndRoundMessage('The ' + currentEnemy.name + ' has been slain.')
+  } else if (currentAdventurer.health <= 0) {
+    fightOver = true
+    ui.updateEndRoundMessage('You have died.')
   }
 }
 

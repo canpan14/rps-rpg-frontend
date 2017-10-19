@@ -21,6 +21,8 @@ const onSignInFailure = function () {
 const onSignOutSuccess = function () {
   greenNotification('Signed out successfully')
   delete store.user
+  $('#encounterInfo').empty()
+  $('#roundResult').empty()
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
   $('#createAdventurerBtn').attr('disabled', true)
@@ -60,7 +62,6 @@ const onCreateAdventurerFailure = function (error) {
 }
 
 const onViewAdventurersSuccess = function (response) {
-  console.log(response)
   $('#myAdventurers tbody tr').remove()
   $('#myAdventurers tbody').append(advRowHandlebar(response))
   $('#myAdventurers').css('display', 'table')
@@ -79,8 +80,12 @@ const onShowAdventurerFailure = function (error) {
 }
 
 const updateEncounter = function (enemy) {
-  console.log(enemy)
+  $('#encounterInfo').empty()
   $('#encounterInfo').append(encounterHandlebar(enemy))
+}
+
+const updateRoundResult = function (text) {
+  $('#roundResult').text(text)
 }
 
 const clearModalFormOnHide = function (event) {
@@ -143,5 +148,6 @@ module.exports = {
   onShowAdventurerSuccess,
   onShowAdventurerFailure,
   updateEncounter,
+  updateRoundResult,
   clearModalFormOnHide
 }

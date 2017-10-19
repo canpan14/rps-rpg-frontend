@@ -7,8 +7,10 @@ $(() => {
   setAPIOrigin(location, config)
 })
 
-const events = require('./theunbalancedadventure/events')
+const events = require('./rpsrpg/events')
+const ui = require('./rpsrpg/ui')
 
 $(() => {
   events.registerHandlers()
+  ui.registerHandlers()
 })

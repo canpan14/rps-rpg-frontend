@@ -6,7 +6,8 @@ const Adventurer = function (adv) {
   this.health = adv.level.health
   this.attack = adv.level.attack
   this.expNeeded = adv.level.exp_needed
-  this.currentExp = adv.currentExp
+  this.currentExp = adv.current_exp
+  this.id = adv.id
 }
 
 const createAdventurer = function (adv) {

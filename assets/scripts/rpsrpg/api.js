@@ -71,6 +71,21 @@ const showAdventurer = function (advId) {
   })
 }
 
+const updateAdventurer = function (advId, advChange) {
+  return $.ajax({
+    url: config.apiOrigin + 'adventurers/' + advId,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      'adventurer': {
+        'current_exp': advChange
+      }
+    }
+  })
+}
+
 const viewEnemies = function () {
   return $.ajax({
     url: config.apiOrigin + 'enemies',
@@ -89,5 +104,6 @@ module.exports = {
   createAdventurer,
   viewAdventurers,
   showAdventurer,
+  updateAdventurer,
   viewEnemies
 }

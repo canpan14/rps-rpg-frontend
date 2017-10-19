@@ -75,9 +75,9 @@ const registerHandlers = function () {
   $('#createAdventurer').on('submit', onCreateAdventurer)
   $('#viewAdventurers').on('click', onViewAdventurers)
   $('#startGameForm').on('submit', onStartGameWithAdventurer)
-  $('#attack').on('click', () => gameController.playerAction('attack'))
-  $('#dodge').on('click', () => gameController.playerAction('dodge'))
-  $('#predictDodge').on('click', () => gameController.playerAction('predict'))
+  $('#rock').on('click', () => gameController.playerAction('rock'))
+  $('#paper').on('click', () => gameController.playerAction('paper'))
+  $('#scissor').on('click', () => gameController.playerAction('scissor'))
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)

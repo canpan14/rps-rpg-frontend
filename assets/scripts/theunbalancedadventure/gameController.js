@@ -51,27 +51,27 @@ const playerAction = function (moveChoice) {
 }
 
 const enemyAction = function () {
-  const actionToTake = weightedRandomAttack({'attack': currentEnemy.attack_chance,
-    'dodge': currentEnemy.dodge_chance,
-    'predict': currentEnemy.predict_dodge_chance})
+  const actionToTake = weightedRandomAttack({'rock': currentEnemy.rock_chance,
+    'paper': currentEnemy.paper_chance,
+    'scissor': currentEnemy.scissor_chance})
   return actionToTake
 }
 
 const roundResult = function (playerMove, enemyMove) {
   roundResultText = 'Both sides used ' + playerMove + ' and it was a stalemate.'
   if (playerMove === enemyMove) return 'draw'
-  roundResultText = 'The enemy dodged your attack and struck you back.'
-  if (playerMove === 'attack' && enemyMove === 'dodge') return 'enemy'
-  roundResultText = 'The enemy thought the you would dodge and was hit by your attack.'
-  if (playerMove === 'attack' && enemyMove === 'predict') return 'player'
-  roundResultText = 'The enemy predict you would try and dodge them and landed a blow.'
-  if (playerMove === 'dodge' && enemyMove === 'predict') return 'enemy'
-  roundResultText = 'You predicted the enemy\'s attack and were able to parry it and land a hit.'
-  if (playerMove === 'dodge' && enemyMove === 'attack') return 'player'
-  roundResultText = 'You thought the enemy would dodge you but they launched an attack and smacked you.'
-  if (playerMove === 'predict' && enemyMove === 'attack') return 'enemy'
-  roundResultText = 'You knew the enemy was going to try to dodge and were able to land your attack.'
-  if (playerMove === 'predict' && enemyMove === 'dodge') return 'player'
+  roundResultText = 'The enemy dodged your rock and gave you a paper cut.'
+  if (playerMove === 'rock' && enemyMove === 'paper') return 'enemy'
+  roundResultText = 'The enemy brought scissors to a rock fight and was crushed.'
+  if (playerMove === 'rock' && enemyMove === 'scissor') return 'player'
+  roundResultText = 'The enemy cut all your hair of with a pair of scissors while you failed to give him a paper cut.'
+  if (playerMove === 'paper' && enemyMove === 'scissor') return 'enemy'
+  roundResultText = 'You caught the enemy\'s rock with your paper and threw it back at him.'
+  if (playerMove === 'paper' && enemyMove === 'rock') return 'player'
+  roundResultText = 'You tried to stop a rock flying at you with a pair of saftey scissors and it didn\'t go well.'
+  if (playerMove === 'scissor' && enemyMove === 'rock') return 'enemy'
+  roundResultText = 'Not even the strongest paper could protect the enemy from your sharp scissors.'
+  if (playerMove === 'scissor' && enemyMove === 'paper') return 'player'
 }
 
 const playerWinsRound = function () {

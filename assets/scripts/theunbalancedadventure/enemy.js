@@ -5,9 +5,9 @@ const Enemy = function (enemy) {
   this.level = enemy.level.number
   this.attack = enemy.level.attack
   this.health = enemy.level.health
-  this.attack_chance = enemy.attack_chance
-  this.dodge_chance = enemy.dodge_chance
-  this.predict_dodge_chance = enemy.predict_dodge_chance
+  this.rock_chance = enemy.rock_chance
+  this.paper_chance = enemy.paper_chance
+  this.scissor_chance = enemy.scissor_chance
 }
 
 const createEnemy = function (enemy) {

@@ -3,6 +3,7 @@
 const store = require('../store')
 const advRowHandlebar = require('../templates/adventurerRow.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
+const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -88,6 +89,11 @@ const updateRoundResult = function (text) {
   $('#roundResult').text(text)
 }
 
+const updateAdventurerInfo = function (adv) {
+  $('#advInfo').empty()
+  $('#advInfo').append(adventurerInfoHandlebar(adv))
+}
+
 const clearModalFormOnHide = function (event) {
   $(event.target).find('form')[0].reset()
 }
@@ -149,5 +155,6 @@ module.exports = {
   onShowAdventurerFailure,
   updateEncounter,
   updateRoundResult,
+  updateAdventurerInfo,
   clearModalFormOnHide
 }

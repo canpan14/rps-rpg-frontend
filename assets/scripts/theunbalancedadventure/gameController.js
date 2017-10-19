@@ -15,6 +15,7 @@ const startGame = function (advInfo) {
   // load match in
   // if no match, start a new one (or if load fails)
   currentAdventurer = Adventurer.createAdventurer(advInfo.adventurer)
+  ui.updateAdventurerInfo(currentAdventurer)
   newEncounter()
 }
 
@@ -82,6 +83,7 @@ const playerWinsRound = function () {
 const enemyWinsRound = function () {
   ui.updateRoundResult(roundResultText)
   currentAdventurer.health -= currentEnemy.attack
+  ui.updateAdventurerInfo(currentAdventurer)
 }
 
 const drawRound = function () {

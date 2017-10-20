@@ -2,13 +2,13 @@
 
 const Enemy = function (enemy) {
   this.name = enemy.name
-  this.level = enemy.level.number
-  this.exp = enemy.level.number * 3
-  this.attack = enemy.level.attack
-  this.health = enemy.level.health
-  this.rock_chance = enemy.rock_chance
-  this.paper_chance = enemy.paper_chance
-  this.scissor_chance = enemy.scissor_chance
+  this.level = parseInt(enemy.level.number)
+  this.exp = parseInt(enemy.level.number * 3)
+  this.attack = parseInt(enemy.level.attack)
+  this.health = parseInt(enemy.level.health)
+  this.rock_chance = parseFloat(enemy.rock_chance)
+  this.paper_chance = parseFloat(enemy.paper_chance)
+  this.scissor_chance = parseFloat(enemy.scissor_chance)
 }
 
 const createEnemy = function (enemy) {

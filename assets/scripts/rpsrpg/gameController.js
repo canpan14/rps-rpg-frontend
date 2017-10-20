@@ -60,6 +60,8 @@ const playerAction = function (moveChoice) {
     enemyDies()
   } else if (currentAdventurer.health <= 0) {
     playerDies()
+  } else {
+    adjustEnemyWeights(moveChoice)
   }
 }
 
@@ -77,7 +79,7 @@ const roundResult = function (playerMove, enemyMove) {
   if (playerMove === 'rock' && enemyMove === 'paper') return 'enemy'
   roundResultText = 'The enemy brought scissors to a rock fight and was crushed.'
   if (playerMove === 'rock' && enemyMove === 'scissor') return 'player'
-  roundResultText = 'The enemy cut all your hair of with a pair of scissors while you failed to give him a paper cut.'
+  roundResultText = 'The enemy cut all your hair off with a pair of scissors while you failed to give him a paper cut.'
   if (playerMove === 'paper' && enemyMove === 'scissor') return 'enemy'
   roundResultText = 'You caught the enemy\'s rock with your paper and threw it back at him.'
   if (playerMove === 'paper' && enemyMove === 'rock') return 'player'
@@ -143,9 +145,39 @@ const weightedRandomAttack = function (weightHash) {
   let sum = 0
   const r = Math.random()
   for (const i in weightHash) {
-    sum += parseFloat(weightHash[i])
+    sum += weightHash[i]
     if (r <= sum) return i
   }
+}
+
+const adjustEnemyWeights = function (playerMove) {
+  const learningCurve = 0.1
+  let addToCounter = 0.0
+  let subtractFromLoser = 0.0
+  switch (playerMove) {
+    case 'rock':
+      addToCounter = (1 - currentEnemy.paper_chance) * learningCurve
+      subtractFromLoser = (currentEnemy.scissor_chance) * learningCurve
+      currentEnemy.paper_chance += addToCounter
+      currentEnemy.scissor_chance -= subtractFromLoser
+      currentEnemy.rock_chance += subtractFromLoser - addToCounter
+      break
+    case 'paper':
+      addToCounter = (1 - currentEnemy.scissor_chance) * learningCurve
+      subtractFromLoser = (currentEnemy.rock_chance) * learningCurve
+      currentEnemy.scissor_chance += addToCounter
+      currentEnemy.rock_chance -= subtractFromLoser
+      currentEnemy.paper_chance += subtractFromLoser - addToCounter
+      break
+    case 'scissor':
+      addToCounter = (1 - currentEnemy.rock_chance) * learningCurve
+      subtractFromLoser = (currentEnemy.paper_chance) * learningCurve
+      currentEnemy.rock_chance += addToCounter
+      currentEnemy.paper_chance -= subtractFromLoser
+      currentEnemy.scissor_chance += subtractFromLoser - addToCounter
+      break
+  }
+  console.log(currentEnemy)
 }
 
 module.exports = {

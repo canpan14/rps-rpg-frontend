@@ -71,7 +71,7 @@ const showAdventurer = function (advId) {
   })
 }
 
-const updateAdventurer = function (advId, advChange) {
+const updateAdventurer = function (advId, adv) {
   return $.ajax({
     url: config.apiOrigin + 'adventurers/' + advId,
     method: 'PATCH',
@@ -80,7 +80,8 @@ const updateAdventurer = function (advId, advChange) {
     },
     data: {
       'adventurer': {
-        'current_exp': advChange
+        'level_id': adv.level,
+        'current_exp': adv.currentExp
       }
     }
   })

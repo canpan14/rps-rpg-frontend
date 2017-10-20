@@ -1,6 +1,5 @@
 'use strict'
 
-const Handlebars = require('~/handlebars')
 const store = require('../store')
 const advRowHandlebar = require('../templates/adventurerRow.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
@@ -144,14 +143,7 @@ const redNotification = function (text, time = 1000) {
   })
 }
 
-const registerHandlers = function () {
-  Handlebars.registerHelper('expNeeded', function (adv) {
-    return adv.expNeeded - adv.currentExps
-  })
-}
-
 module.exports = {
-  registerHandlers,
   onSignInSuccess,
   onSignInFailure,
   onSignOutSuccess,

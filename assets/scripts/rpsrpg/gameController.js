@@ -108,16 +108,31 @@ const enemyDies = function () {
   ui.updateEndRoundMessage('The ' + currentEnemy.name + ' has been slain.')
 
   currentAdventurer.currentExp += currentEnemy.level * 3
-
-  api.updateAdventurer(currentAdventurer.id, currentAdventurer.currentExp)
-    .then(ui.updateAdventurer)
-    .catch((error) => console.log(error))
+  checkForLevelUp()
+  updateAdventurerOnServer()
 }
 
 const playerDies = function () {
   fightOver = true
   ui.updateEndRoundMessage('You have died.')
 }
+
+const checkForLevelUp = function () {
+  if (currentAdventurer.expNeeded === -1) return
+  if (currentAdventurer.currentExp >= currentAdventurer.expNeeded) {
+    currentAdventurer.level += 1
+  }
+}
+
+const updateAdventurerOnServer = function () {
+  api.updateAdventurer(currentAdventurer.id, currentAdventurer)
+    .then((response) => {
+      currentAdventurer = Adventurer.createAdventurer(response.adventurer)
+      ui.updateAdventurerInfo(currentAdventurer)
+    })
+    .catch((error) => console.log(error))
+}
+
 /**
  * Returns random hash key based on weights
  * https://stackoverflow.com/questions/8435183/generate-a-weighted-random-number

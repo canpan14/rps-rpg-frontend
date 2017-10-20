@@ -107,7 +107,7 @@ const enemyDies = function () {
   fightOver = true
   ui.updateEndRoundMessage('The ' + currentEnemy.name + ' has been slain.')
 
-  currentAdventurer.currentExp += currentEnemy.level * 3
+  currentAdventurer.currentExp += currentEnemy.exp
   checkForLevelUp()
   updateAdventurerOnServer()
 }

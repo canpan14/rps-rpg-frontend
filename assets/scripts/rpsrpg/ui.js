@@ -67,7 +67,6 @@ const onCreateAdventurerFailure = function (error) {
 const onViewAdventurersSuccess = function (response) {
   $('#chooseAdv').empty()
   $('#chooseAdv').append(advTableHandlebar(response))
-  $('#chooseAdv').css('display', 'table')
 }
 
 const onViewAdventurersFailure = function (error) {

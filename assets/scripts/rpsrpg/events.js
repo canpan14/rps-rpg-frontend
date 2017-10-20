@@ -98,7 +98,6 @@ const registerHandlers = function () {
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 
   $('#chooseAdventurerTab').on('click', setUpChooseAdventurersTab)
-  $('#chooseAdventurerTab').on('hidden.bs.tab', () => $('#chooseAdv').empty())
 }
 
 module.exports = {

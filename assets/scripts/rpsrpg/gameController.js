@@ -120,7 +120,7 @@ const playerDies = function () {
 }
 
 const checkForLevelUp = function () {
-  if (currentAdventurer.expNeeded === -1) return
+  if (!currentAdventurer.expNeeded) return
   if (currentAdventurer.currentExp >= currentAdventurer.expNeeded) {
     currentAdventurer.level += 1
   }

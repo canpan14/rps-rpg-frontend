@@ -52,10 +52,13 @@ const onViewAdventurers = function () {
 
 const onStartGameWithAdventurer = function (event) {
   event.preventDefault()
-  const advId = $(this).serialize().split('=')[1]
-  api.showAdventurer(advId)
+  api.showAdventurer(event.currentTarget.id)
     .then((response) => {
       ui.onShowAdventurerSuccess(response)
+      return response
+    })
+    .then((response) => {
+      $('#goAdventuringTab').tab('show')
       return response
     })
     .then(gameController.startGame)
@@ -65,7 +68,12 @@ const onStartGameWithAdventurer = function (event) {
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
-      response.adventurers.length > 0 ? ui.onViewAdventurersSuccess(response) : ui.userHasNoAdventurers()
+      if (response.adventurers.length > 0) {
+        ui.onViewAdventurersSuccess(response)
+        $('#myAdventurers > tbody > tr').on('click', onStartGameWithAdventurer)
+      } else {
+        ui.userHasNoAdventurers()
+      }
     })
 }
 
@@ -90,6 +98,7 @@ const registerHandlers = function () {
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 
   $('#chooseAdventurerTab').on('click', setUpChooseAdventurersTab)
+  $('#chooseAdventurerTab').on('hidden.bs.tab', () => $('#chooseAdv').empty())
 }
 
 module.exports = {

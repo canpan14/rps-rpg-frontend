@@ -11,7 +11,7 @@
     </thead>
     <tbody>
       {{#each adventurers as |adv| }}
-      <tr>
+      <tr id="{{adv.id}}">
         <td>{{adv.name}}</td>
         <td>{{adv.level.number}}</td>
         <td>{{adv.current_exp}}</td>

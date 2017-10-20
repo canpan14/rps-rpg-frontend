@@ -97,6 +97,16 @@ const viewEnemies = function () {
   })
 }
 
+const viewEnemyModifiers = function () {
+  return $.ajax({
+    url: config.apiOrigin + 'enemy_modifiers',
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
@@ -106,5 +116,6 @@ module.exports = {
   viewAdventurers,
   showAdventurer,
   updateAdventurer,
-  viewEnemies
+  viewEnemies,
+  viewEnemyModifiers
 }

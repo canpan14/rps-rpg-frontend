@@ -2,8 +2,8 @@
 
 const api = require('./api')
 const ui = require('./ui')
-const Enemy = require('./enemy')
 const Adventurer = require('./adventurer')
+const enemyGenerator = require('./enemyGenerator')
 
 let currentAdventurer
 let currentEnemy
@@ -23,13 +23,9 @@ const startGame = function (advInfo) {
 const newEncounter = function () {
   fightOver = false
   ui.updateEndRoundMessage('')
-
-  api.viewEnemies()
-    .then((enemies) => {
-      enemies = enemies.enemies
-      currentEnemy = Enemy.createEnemy(enemies[Math.floor(Math.random() * enemies.length)])
-    })
-    .then(() => {
+  enemyGenerator.generateEnemy()
+    .then((enemyGenerated) => {
+      currentEnemy = enemyGenerated
       ui.updateEncounter(currentEnemy)
     })
 }
@@ -66,9 +62,9 @@ const playerAction = function (moveChoice) {
 }
 
 const enemyAction = function () {
-  const actionToTake = weightedRandomAttack({'rock': currentEnemy.rock_chance,
-    'paper': currentEnemy.paper_chance,
-    'scissor': currentEnemy.scissor_chance})
+  const actionToTake = weightedRandomAttack({'rock': currentEnemy.rockChance,
+    'paper': currentEnemy.paperChance,
+    'scissor': currentEnemy.scissorChance})
   return actionToTake
 }
 
@@ -156,25 +152,25 @@ const adjustEnemyWeights = function (playerMove) {
   let subtractFromLoser = 0.0
   switch (playerMove) {
     case 'rock':
-      addToCounter = (1 - currentEnemy.paper_chance) * learningCurve
-      subtractFromLoser = (currentEnemy.scissor_chance) * learningCurve
-      currentEnemy.paper_chance += addToCounter
-      currentEnemy.scissor_chance -= subtractFromLoser
-      currentEnemy.rock_chance += subtractFromLoser - addToCounter
+      addToCounter = (1 - currentEnemy.paperChance) * learningCurve
+      subtractFromLoser = (currentEnemy.scissorChance) * learningCurve
+      currentEnemy.paperChance += addToCounter
+      currentEnemy.scissorChance -= subtractFromLoser
+      currentEnemy.rockChance += subtractFromLoser - addToCounter
       break
     case 'paper':
-      addToCounter = (1 - currentEnemy.scissor_chance) * learningCurve
-      subtractFromLoser = (currentEnemy.rock_chance) * learningCurve
-      currentEnemy.scissor_chance += addToCounter
-      currentEnemy.rock_chance -= subtractFromLoser
-      currentEnemy.paper_chance += subtractFromLoser - addToCounter
+      addToCounter = (1 - currentEnemy.scissorChance) * learningCurve
+      subtractFromLoser = (currentEnemy.rockChance) * learningCurve
+      currentEnemy.scissorChance += addToCounter
+      currentEnemy.rockChance -= subtractFromLoser
+      currentEnemy.paperChance += subtractFromLoser - addToCounter
       break
     case 'scissor':
-      addToCounter = (1 - currentEnemy.rock_chance) * learningCurve
-      subtractFromLoser = (currentEnemy.paper_chance) * learningCurve
-      currentEnemy.rock_chance += addToCounter
-      currentEnemy.paper_chance -= subtractFromLoser
-      currentEnemy.scissor_chance += subtractFromLoser - addToCounter
+      addToCounter = (1 - currentEnemy.rockChance) * learningCurve
+      subtractFromLoser = (currentEnemy.paperChance) * learningCurve
+      currentEnemy.rockChance += addToCounter
+      currentEnemy.paperChance -= subtractFromLoser
+      currentEnemy.scissorChance += subtractFromLoser - addToCounter
       break
   }
   console.log(currentEnemy)

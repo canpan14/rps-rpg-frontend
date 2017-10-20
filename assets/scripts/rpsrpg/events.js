@@ -10,6 +10,7 @@ const onSignIn = function (event) {
   const formData = getFormFields(event.target)
   api.signIn(formData)
     .then(ui.onSignInSuccess)
+    .then(setUpChooseAdventurersTab)
     .catch(ui.onSignInFailure)
 }
 
@@ -44,10 +45,8 @@ const onCreateAdventurer = function (event) {
     .catch(ui.onCreateAdventurerFailure)
 }
 
-const onViewAdventurers = function (event) {
-  event.preventDefault()
-  api.viewAdventurers()
-    .then(ui.onViewAdventurersSuccess)
+const onViewAdventurers = function () {
+  return api.viewAdventurers()
     .catch(ui.onViewAdventurersFailure)
 }
 
@@ -61,6 +60,13 @@ const onStartGameWithAdventurer = function (event) {
     })
     .then(gameController.startGame)
     .catch(ui.onShowAdventurerFailure)
+}
+
+const setUpChooseAdventurersTab = function () {
+  onViewAdventurers()
+    .then((response) => {
+      response.adventurers.length > 0 ? ui.onViewAdventurersSuccess(response) : ui.userHasNoAdventurers()
+    })
 }
 
 const clearModalFormOnHide = function (event) {
@@ -83,6 +89,8 @@ const registerHandlers = function () {
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
+
+  $('#chooseAdventurerTab').on('show.bs.tab', setUpChooseAdventurersTab)
 }
 
 module.exports = {

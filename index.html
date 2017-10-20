@@ -51,13 +51,13 @@
       <!-- Tab bar tabs -->
       <div class="tab-content" id="myTabContent">
         <!-- Choose Adventurer Tab Content -->
-        <div class="tab-pane fade show active" id="chooseAdv" role="tabpanel" aria-labelledby="home-tab">
+        <div class="tab-pane fade show active" id="chooseAdv" role="tabpanel" aria-labelledby="choose-tab">
           <div class="table-responsive" id="adventurersTableContainer">
           </div>
         </div>
 
         <!-- Main Game Tab Content -->
-        <div class="tab-pane fade" id="mainGame" role="tabpanel" aria-labelledby="profile-tab">
+        <div class="tab-pane fade" id="mainGame" role="tabpanel" aria-labelledby="play-tab">
           <div class="d-flex flex-row justify-content-center">
             <div class="text-center" id="advInfo">
             </div>
@@ -78,7 +78,7 @@
         </div>
 
         <!-- Stats Tab Content -->
-        <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="contact-tab">
+        <div class="tab-pane fade" id="stats" role="tabpanel" aria-labelledby="stats-tab">
         </div>
       </div>
 
@@ -86,17 +86,12 @@
 
 
       <!-- Temporary UI for testing -->
-      <div class="d-flex flex-row justify-content-center">
-        <button class="btn btn-primary p-2" id="createAdventurerBtn" data-toggle="modal" data-target="#createAdventurerModal" disabled>New RPS Adventurer</button>
-        <button class="btn btn-secondary p-2" id="viewAdventurers" disabled>View My Adventurers</button>
-      </div class="row">
       <div class="row justify-content-center">
         <form class="form-inline" id="startGameForm">
           <input type="text" placeholder="adv ID" name="advID" required>
           <button type="submit" class="btn btn-primary">Start Game</button>
         </form>
       </div>
-
       <!-- End Temp UI -->
 
       <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">

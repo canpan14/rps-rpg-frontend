@@ -4,6 +4,7 @@ const store = require('../store')
 const advTableHandlebar = require('../templates/adventurerTable.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
 const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
+const noAdvYetHandlebar = require('../templates/noAdventurersYet.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -103,6 +104,10 @@ const clearModalFormOnHide = function (event) {
   $(event.target).find('form')[0].reset()
 }
 
+const userHasNoAdventurers = function () {
+  $('#chooseAdv').append(noAdvYetHandlebar())
+}
+
 const greenNotification = function (text, time = 1000) {
   $.notify({
     message: text
@@ -162,5 +167,6 @@ module.exports = {
   updateRoundResult,
   updateAdventurerInfo,
   updateEndRoundMessage,
+  userHasNoAdventurers,
   clearModalFormOnHide
 }

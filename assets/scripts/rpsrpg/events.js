@@ -79,7 +79,6 @@ const registerHandlers = function () {
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
-  $('#viewAdventurers').on('click', onViewAdventurers)
   $('#startGameForm').on('submit', onStartGameWithAdventurer)
   $('#rock').on('click', () => gameController.playerAction('rock'))
   $('#paper').on('click', () => gameController.playerAction('paper'))
@@ -90,7 +89,7 @@ const registerHandlers = function () {
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 
-  $('#chooseAdventurerTab').on('show.bs.tab', setUpChooseAdventurersTab)
+  $('#chooseAdventurerTab').on('click', setUpChooseAdventurersTab)
 }
 
 module.exports = {

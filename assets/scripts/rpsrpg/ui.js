@@ -12,8 +12,7 @@ const onSignInSuccess = function (response) {
   store.user = response.user
   $('.activeBeforeSignIn').hide()
   $('.activeAfterSignIn').show()
-  $('#createAdventurerBtn').attr('disabled', false)
-  $('#viewAdventurers').attr('disabled', false)
+  $('#collapseTabs').collapse('show')
 }
 
 const onSignInFailure = function () {
@@ -23,13 +22,14 @@ const onSignInFailure = function () {
 const onSignOutSuccess = function () {
   greenNotification('Signed out successfully')
   delete store.user
+  $('#collapseTabs').collapse('hide')
+  $('#chooseAdv').empty()
+  $('#chooseAdventurerTab').tab('show')
   $('#encounterInfo').empty()
   $('#roundResult').empty()
   $('#endRoundMessage').empty()
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
-  $('#createAdventurerBtn').attr('disabled', true)
-  $('#viewAdventurers').attr('disabled', true)
 }
 
 const onSignOutFailure = function () {
@@ -65,9 +65,9 @@ const onCreateAdventurerFailure = function (error) {
 }
 
 const onViewAdventurersSuccess = function (response) {
-  $('#adventurersTableContainer').empty()
-  $('#adventurersTableContainer').append(advTableHandlebar(response))
-  $('#adventurersTableContainer').css('display', 'table')
+  $('#chooseAdv').empty()
+  $('#chooseAdv').append(advTableHandlebar(response))
+  $('#chooseAdv').css('display', 'table')
 }
 
 const onViewAdventurersFailure = function (error) {

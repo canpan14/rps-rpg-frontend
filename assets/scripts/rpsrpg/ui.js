@@ -1,7 +1,7 @@
 'use strict'
 
 const store = require('../store')
-const advRowHandlebar = require('../templates/adventurerRow.handlebars')
+const advTableHandlebar = require('../templates/adventurerTable.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
 const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
 
@@ -64,9 +64,9 @@ const onCreateAdventurerFailure = function (error) {
 }
 
 const onViewAdventurersSuccess = function (response) {
-  $('#myAdventurers tbody tr').remove()
-  $('#myAdventurers tbody').append(advRowHandlebar(response))
-  $('#myAdventurers').css('display', 'table')
+  $('#adventurersTableContainer').empty()
+  $('#adventurersTableContainer').append(advTableHandlebar(response))
+  $('#adventurersTableContainer').css('display', 'table')
 }
 
 const onViewAdventurersFailure = function (error) {

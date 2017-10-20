@@ -67,6 +67,7 @@ const onViewAdventurersSuccess = function (response) {
   $('#myAdventurers tbody tr').remove()
   $('#myAdventurers tbody').append(advRowHandlebar(response))
   $('#myAdventurers').css('display', 'table')
+  $('#collapseAdvTable').collapse('show')
 }
 
 const onViewAdventurersFailure = function (error) {
@@ -79,6 +80,10 @@ const onShowAdventurerSuccess = function (response) {
 
 const onShowAdventurerFailure = function (error) {
   console.log(error)
+}
+
+const closeAdventurerTable = function () {
+  $('#collapseAdvTable').collapse('hide')
 }
 
 const updateEncounter = function (enemy) {
@@ -158,6 +163,7 @@ module.exports = {
   onViewAdventurersFailure,
   onShowAdventurerSuccess,
   onShowAdventurerFailure,
+  closeAdventurerTable,
   updateEncounter,
   updateRoundResult,
   updateAdventurerInfo,

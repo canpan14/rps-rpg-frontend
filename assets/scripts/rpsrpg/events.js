@@ -44,8 +44,7 @@ const onCreateAdventurer = function (event) {
     .catch(ui.onCreateAdventurerFailure)
 }
 
-const onViewAdventurers = function (event) {
-  event.preventDefault()
+const onViewAdventurers = function () {
   api.viewAdventurers()
     .then(ui.onViewAdventurersSuccess)
     .catch(ui.onViewAdventurersFailure)
@@ -63,6 +62,11 @@ const onStartGameWithAdventurer = function (event) {
     .catch(ui.onShowAdventurerFailure)
 }
 
+const toggleViewAdventurersTable = function (event) {
+  event.preventDefault()
+  $('#collapseAdvTable').hasClass('show') ? ui.closeAdventurerTable() : onViewAdventurers()
+}
+
 const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
@@ -73,7 +77,7 @@ const registerHandlers = function () {
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
-  $('#viewAdventurers').on('click', onViewAdventurers)
+  $('#viewAdventurers').on('click', toggleViewAdventurersTable)
   $('#startGameForm').on('submit', onStartGameWithAdventurer)
   $('#rock').on('click', () => gameController.playerAction('rock'))
   $('#paper').on('click', () => gameController.playerAction('paper'))

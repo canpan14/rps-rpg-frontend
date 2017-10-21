@@ -5,6 +5,7 @@ const advTableHandlebar = require('../templates/adventurerTable.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
 const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
 const noAdvYetHandlebar = require('../templates/noAdventurersYet.handlebars')
+const mainGameTabHandelbar = require('../templates/mainGameTabSetup.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -24,6 +25,7 @@ const onSignOutSuccess = function () {
   delete store.user
   $('#collapseTabs').collapse('hide')
   $('#chooseAdv').empty()
+  $('#mainGame').empty()
   $('#chooseAdventurerTab').tab('show')
   $('#encounterInfo').empty()
   $('#roundResult').empty()
@@ -108,6 +110,11 @@ const userHasNoAdventurers = function () {
   $('#chooseAdv').append(noAdvYetHandlebar())
 }
 
+const setUpMainGameTab = function () {
+  $('#mainGame').empty()
+  $('#mainGame').append(mainGameTabHandelbar())
+}
+
 const greenNotification = function (text, time = 1000) {
   $.notify({
     message: text
@@ -168,5 +175,6 @@ module.exports = {
   updateAdventurerInfo,
   updateEndRoundMessage,
   userHasNoAdventurers,
+  setUpMainGameTab,
   clearModalFormOnHide
 }

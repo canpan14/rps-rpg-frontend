@@ -59,6 +59,10 @@ const onStartGameWithAdventurer = function (event) {
       return response
     })
     .then((response) => {
+      ui.setUpMainGameTab()
+      $('#rock').on('click', () => gameController.playerAction('rock'))
+      $('#paper').on('click', () => gameController.playerAction('paper'))
+      $('#scissor').on('click', () => gameController.playerAction('scissor'))
       $('#goAdventuringTab').tab('show')
       return response
     })

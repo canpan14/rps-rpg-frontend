@@ -55,6 +55,7 @@ const onStartGameWithAdventurer = function (event) {
   api.showAdventurer(event.currentTarget.id)
     .then((response) => {
       ui.onShowAdventurerSuccess(response)
+      if (!response.adventurer.is_alive) throw new Error('Tried to load dead adventurer')
       return response
     })
     .then((response) => {

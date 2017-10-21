@@ -114,7 +114,7 @@ const enemyDies = function () {
 const playerDies = function () {
   fightOver = true
   currentAdventurer.isAlive = false
-  ui.updateEndRoundMessage('You have died.')
+  ui.playerDies()
   updateAdventurerOnServer()
 }
 
@@ -176,7 +176,6 @@ const adjustEnemyWeights = function (playerMove) {
       currentEnemy.scissorChance += subtractFromLoser - addToCounter
       break
   }
-  console.log(currentEnemy)
 }
 
 module.exports = {

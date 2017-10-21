@@ -73,8 +73,8 @@ const onStartGameWithAdventurer = function (event) {
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
+      response.adventurers = response.adventurers.filter(adv => adv.is_alive)
       if (response.adventurers && response.adventurers.length > 0) {
-        response.adventurers = response.adventurers.filter(adv => adv.is_alive)
         ui.onViewAdventurersSuccess(response)
         $('#myAdventurers > tbody > tr').on('click', onStartGameWithAdventurer)
       } else {
@@ -94,9 +94,6 @@ const registerHandlers = function () {
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
   $('#startGameForm').on('submit', onStartGameWithAdventurer)
-  $('#rock').on('click', () => gameController.playerAction('rock'))
-  $('#paper').on('click', () => gameController.playerAction('paper'))
-  $('#scissor').on('click', () => gameController.playerAction('scissor'))
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)

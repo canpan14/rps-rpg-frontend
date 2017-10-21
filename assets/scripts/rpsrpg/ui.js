@@ -5,7 +5,8 @@ const advTableHandlebar = require('../templates/adventurerTable.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
 const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
 const noAdvYetHandlebar = require('../templates/noAdventurersYet.handlebars')
-const mainGameTabHandelbar = require('../templates/mainGameTabSetup.handlebars')
+const mainGameTabHandlebar = require('../templates/mainGameTabSetup.handlebars')
+const adventurerDiesHandlebar = require('../templates/adventurerDies.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -61,9 +62,8 @@ const onCreateAdventurerSuccess = function (response) {
   greenNotification('Adventurer created')
 }
 
-const onCreateAdventurerFailure = function (error) {
+const onCreateAdventurerFailure = function () {
   redNotification('You cannot have two living adventurers with the same name')
-  console.log(error)
 }
 
 const onViewAdventurersSuccess = function (response) {
@@ -101,10 +101,6 @@ const updateEndRoundMessage = function (text) {
   $('#endRoundMessage').text(text)
 }
 
-const clearModalFormOnHide = function (event) {
-  $(event.target).find('form')[0].reset()
-}
-
 const userHasNoAdventurers = function () {
   $('#chooseAdv').empty()
   $('#chooseAdv').append(noAdvYetHandlebar())
@@ -112,7 +108,17 @@ const userHasNoAdventurers = function () {
 
 const setUpMainGameTab = function () {
   $('#mainGame').empty()
-  $('#mainGame').append(mainGameTabHandelbar())
+  $('#mainGame').append(mainGameTabHandlebar())
+}
+
+const playerDies = function () {
+  $('#mainGame').empty()
+  $('#mainGame').append(adventurerDiesHandlebar())
+  $('#chooseAdvFromDead').on('click', () => $('#chooseAdventurerTab').tab('show'))
+}
+
+const clearModalFormOnHide = function (event) {
+  $(event.target).find('form')[0].reset()
 }
 
 const greenNotification = function (text, time = 1000) {
@@ -176,5 +182,6 @@ module.exports = {
   updateEndRoundMessage,
   userHasNoAdventurers,
   setUpMainGameTab,
+  playerDies,
   clearModalFormOnHide
 }

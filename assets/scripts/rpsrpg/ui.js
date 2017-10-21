@@ -7,6 +7,7 @@ const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars'
 const noAdvYetHandlebar = require('../templates/noAdventurersYet.handlebars')
 const mainGameTabHandlebar = require('../templates/mainGameTabSetup.handlebars')
 const adventurerDiesHandlebar = require('../templates/adventurerDies.handlebars')
+const enemyDiesHandlebar = require('../templates/enemyDies.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -76,7 +77,7 @@ const onViewAdventurersFailure = function (error) {
 }
 
 const onShowAdventurerSuccess = function (response) {
-  greenNotification('Beginning adventure with ' + response.adventurer.name)
+  greenNotification('Adventuring with ' + response.adventurer.name)
 }
 
 const onShowAdventurerFailure = function (error) {
@@ -114,6 +115,12 @@ const setUpMainGameTab = function () {
 const playerDies = function () {
   $('#mainGame').empty()
   $('#mainGame').append(adventurerDiesHandlebar())
+  $('#chooseAdvFromDead').on('click', () => $('#chooseAdventurerTab').tab('show'))
+}
+
+const enemyDies = function (enemy) {
+  $('#mainGame').empty()
+  $('#mainGame').append(enemyDiesHandlebar(enemy))
   $('#chooseAdvFromDead').on('click', () => $('#chooseAdventurerTab').tab('show'))
 }
 
@@ -183,5 +190,6 @@ module.exports = {
   userHasNoAdventurers,
   setUpMainGameTab,
   playerDies,
+  enemyDies,
   clearModalFormOnHide
 }

@@ -71,6 +71,24 @@ const onStartGameWithAdventurer = function (event) {
     .catch(ui.onShowAdventurerFailure)
 }
 
+const continueGameWithAdventurer = function (event) {
+  event.preventDefault()
+  api.showAdventurer(gameController.getCurrentAdventurerId())
+    .then((response) => {
+      ui.onShowAdventurerSuccess(response)
+      return response
+    })
+    .then((response) => {
+      ui.setUpMainGameTab()
+      $('#rock').on('click', () => gameController.playerAction('rock'))
+      $('#paper').on('click', () => gameController.playerAction('paper'))
+      $('#scissor').on('click', () => gameController.playerAction('scissor'))
+      return response
+    })
+    .then(gameController.startGame)
+    .catch(ui.onShowAdventurerFailure)
+}
+
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
@@ -94,16 +112,20 @@ const registerHandlers = function () {
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
-  $('#startGameForm').on('submit', onStartGameWithAdventurer)
 
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 
-  $('#chooseAdventurerTab').on('click', setUpChooseAdventurersTab)
+  $('#chooseAdventurerTab').on('shown.bs.tab', setUpChooseAdventurersTab)
+  $('#mainGame').on('DOMSubtreeModified', () => {
+    $('#continueOnAdventure').off('click')
+    $('#continueOnAdventure').on('click', continueGameWithAdventurer)
+  })
 }
 
 module.exports = {
-  registerHandlers
+  registerHandlers,
+  onStartGameWithAdventurer
 }

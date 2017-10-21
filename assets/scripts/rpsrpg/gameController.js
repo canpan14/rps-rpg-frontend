@@ -10,6 +10,8 @@ let currentEnemy
 let roundResultText
 let fightOver = true
 
+const getCurrentAdventurerId = () => currentAdventurer.id
+
 const startGame = function (advInfo) {
   // load in adv info where needed
   // check for previous match
@@ -58,9 +60,7 @@ const playerAction = function (moveChoice) {
     playerDies()
   } else {
     adjustEnemyWeights(moveChoice)
-    console.log(currentEnemy)
   }
-  // update adven
 }
 
 const enemyAction = function () {
@@ -105,8 +105,7 @@ const drawRound = function () {
 
 const enemyDies = function () {
   fightOver = true
-  ui.updateEndRoundMessage('The ' + currentEnemy.name + ' has been slain.')
-
+  ui.enemyDies(currentEnemy)
   currentAdventurer.currentExp += currentEnemy.exp
   checkForLevelUp()
   updateAdventurerOnServer()
@@ -181,5 +180,6 @@ const adjustEnemyWeights = function (playerMove) {
 
 module.exports = {
   startGame,
-  playerAction
+  playerAction,
+  getCurrentAdventurerId
 }

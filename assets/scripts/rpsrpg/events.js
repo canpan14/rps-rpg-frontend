@@ -42,6 +42,7 @@ const onCreateAdventurer = function (event) {
   const formData = getFormFields(event.target)
   api.createAdventurer(formData)
     .then(ui.onCreateAdventurerSuccess)
+    .then(setUpChooseAdventurersTab)
     .catch(ui.onCreateAdventurerFailure)
 }
 

@@ -10,6 +10,7 @@ const generateEnemy = function () {
   return baseEnemy()
     .then(adjustEnemyForPrefix)
     .then(adjustEnemyForSuffix)
+    .then(normalizeWeights)
     .then(() => {
       return enemyToGenerate
     })
@@ -51,6 +52,15 @@ const adjustEnemyForSuffix = function () {
       enemyToGenerate.health = Math.round(enemyToGenerate.health * randomSuffix.healthMult)
       enemyToGenerate.attack = Math.round(enemyToGenerate.attack * randomSuffix.attackMult)
     })
+}
+
+const normalizeWeights = function () {
+  const weights = [enemyToGenerate.rockChance, enemyToGenerate.paperChance, enemyToGenerate.scissorChance]
+  const total = weights.reduce((a, b) => a + b)
+  const normWeights = weights.map(v => v / total)
+  enemyToGenerate.rockChance = normWeights[0]
+  enemyToGenerate.paperChance = normWeights[1]
+  enemyToGenerate.scissorChance = normWeights[2]
 }
 
 module.exports = {

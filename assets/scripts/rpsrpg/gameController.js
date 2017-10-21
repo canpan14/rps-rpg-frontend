@@ -58,6 +58,7 @@ const playerAction = function (moveChoice) {
     playerDies()
   } else {
     adjustEnemyWeights(moveChoice)
+    console.log(currentEnemy)
   }
   // update adven
 }

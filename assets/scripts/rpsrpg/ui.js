@@ -104,6 +104,7 @@ const clearModalFormOnHide = function (event) {
 }
 
 const userHasNoAdventurers = function () {
+  $('#chooseAdv').empty()
   $('#chooseAdv').append(noAdvYetHandlebar())
 }
 

@@ -81,7 +81,8 @@ const updateAdventurer = function (advId, adv) {
     data: {
       'adventurer': {
         'level_id': adv.level,
-        'current_exp': adv.currentExp
+        'current_exp': adv.currentExp,
+        'is_alive': adv.isAlive
       }
     }
   })

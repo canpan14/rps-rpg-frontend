@@ -59,6 +59,7 @@ const playerAction = function (moveChoice) {
   } else {
     adjustEnemyWeights(moveChoice)
   }
+  // update adven
 }
 
 const enemyAction = function () {
@@ -112,7 +113,9 @@ const enemyDies = function () {
 
 const playerDies = function () {
   fightOver = true
+  currentAdventurer.isAlive = false
   ui.updateEndRoundMessage('You have died.')
+  updateAdventurerOnServer()
 }
 
 const checkForLevelUp = function () {

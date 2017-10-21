@@ -7,6 +7,7 @@ const Adventurer = function (adv) {
   this.attack = adv.level.attack
   this.expNeeded = adv.level.exp_needed
   this.currentExp = adv.current_exp
+  this.isAlive = adv.is_alive
   this.id = adv.id
 }
 

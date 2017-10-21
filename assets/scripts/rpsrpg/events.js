@@ -68,7 +68,8 @@ const onStartGameWithAdventurer = function (event) {
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
-      if (response.adventurers.length > 0) {
+      if (response.adventurers && response.adventurers.length > 0) {
+        response.adventurers = response.adventurers.filter(adv => adv.is_alive)
         ui.onViewAdventurersSuccess(response)
         $('#myAdventurers > tbody > tr').on('click', onStartGameWithAdventurer)
       } else {

@@ -64,7 +64,7 @@ const onCreateAdventurerSuccess = function (response) {
 }
 
 const onCreateAdventurerFailure = function () {
-  redNotification('You cannot have two living adventurers with the same name')
+  redNotification('Failed to create adventurer, try again later')
 }
 
 const onViewAdventurersSuccess = function (response) {
@@ -72,16 +72,16 @@ const onViewAdventurersSuccess = function (response) {
   $('#chooseAdv').append(advTableHandlebar(response))
 }
 
-const onViewAdventurersFailure = function (error) {
-  console.log(error)
+const onViewAdventurersFailure = function () {
+  redNotification('Failed to load adventurers, try again later')
 }
 
 const onShowAdventurerSuccess = function (response) {
   greenNotification('Adventuring with ' + response.adventurer.name)
 }
 
-const onShowAdventurerFailure = function (error) {
-  console.log(error)
+const onShowAdventurerFailure = function () {
+  redNotification('Failed to load adventurer, try again later')
 }
 
 const updateEncounter = function (enemy) {

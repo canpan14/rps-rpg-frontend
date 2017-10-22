@@ -30,6 +30,7 @@ const onSignOutSuccess = function () {
   greenNotification('Signed out successfully')
   delete store.user
   $('#collapseTabs').collapse('hide')
+  $('#goAdventuringTab').addClass('disabled')
   $('#chooseAdv').empty()
   $('#mainGame').empty()
   $('#chooseAdventurerTab').tab('show')

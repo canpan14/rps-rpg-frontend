@@ -4,6 +4,7 @@ const getFormFields = require('../../../lib/get-form-fields')
 const api = require('./api')
 const ui = require('./ui')
 const gameController = require('./gameController')
+const store = require('../store')
 
 const onSignIn = function (event) {
   event.preventDefault()
@@ -64,6 +65,7 @@ const onStartGameWithAdventurer = function (event) {
       $('#rock').on('click', () => gameController.playerAction('rock'))
       $('#paper').on('click', () => gameController.playerAction('paper'))
       $('#scissor').on('click', () => gameController.playerAction('scissor'))
+      $('#goAdventuringTab').removeClass('disabled')
       $('#goAdventuringTab').tab('show')
       return response
     })
@@ -96,6 +98,7 @@ const setUpUserStatsTab = function () {
 }
 
 const setUpChooseAdventurersTab = function () {
+  if (!store.user) return
   onViewAdventurers()
     .then((response) => {
       ui.updateAdvStatsTabDropdown(Object.assign({}, response))

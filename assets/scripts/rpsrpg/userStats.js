@@ -8,6 +8,7 @@ const UserStats = function () {
   this.rockCount = 0
   this.paperCount = 0
   this.scissorCount = 0
+  this.kills = 0
 }
 
 const createUserStats = function () {

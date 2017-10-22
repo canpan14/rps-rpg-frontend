@@ -85,7 +85,8 @@ const updateAdventurer = function (advId, adv) {
         'is_alive': adv.isAlive,
         'rock_count': adv.rockCount,
         'paper_count': adv.paperCount,
-        'scissor_count': adv.scissorCount
+        'scissor_count': adv.scissorCount,
+        'kills': adv.kills
       }
     }
   })

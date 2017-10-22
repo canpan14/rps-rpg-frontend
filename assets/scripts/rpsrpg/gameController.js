@@ -118,6 +118,7 @@ const drawRound = function () {
 const enemyDies = function () {
   fightOver = true
   ui.enemyDies(currentEnemy)
+  currentAdventurer.kills++
   currentAdventurer.currentExp += currentEnemy.exp
   checkForLevelUp()
   updateAdventurerOnServer()

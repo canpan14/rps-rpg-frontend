@@ -12,6 +12,7 @@ const Adventurer = function (adv) {
   this.rockCount = parseInt(adv.rock_count)
   this.paperCount = parseInt(adv.paper_count)
   this.scissorCount = parseInt(adv.scissor_count)
+  this.kills = parseInt(adv.kills)
 }
 
 const createAdventurer = function (adv) {

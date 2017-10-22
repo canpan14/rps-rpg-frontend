@@ -9,6 +9,7 @@ const mainGameTabHandlebar = require('../templates/mainGameTabSetup.handlebars')
 const adventurerDiesHandlebar = require('../templates/adventurerDies.handlebars')
 const enemyDiesHandlebar = require('../templates/enemyDies.handlebars')
 const advStatsTabDropdownHandlebar = require('../templates/advStatsTabDropdown.handlebars')
+const advTabHandlebar = require('../templates/advStatsTab.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -115,6 +116,11 @@ const updateAdvStatsTabDropdown = function (response) {
   $('#advStatsTabDropdownContent').append(advStatsTabDropdownHandlebar(response))
 }
 
+const updateAdvTab = function (response) {
+  $('#advStats').empty()
+  $('#advStats').append(advTabHandlebar(response.adventurer))
+}
+
 const userHasNoAdventurers = function () {
   $('#chooseAdv').empty()
   $('#chooseAdv').append(noAdvYetHandlebar())
@@ -201,6 +207,7 @@ module.exports = {
   updateAdventurerInfo,
   updateEndRoundMessage,
   updateAdvStatsTabDropdown,
+  updateAdvTab,
   userHasNoAdventurers,
   setUpMainGameTab,
   playerDies,

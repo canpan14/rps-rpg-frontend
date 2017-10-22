@@ -93,6 +93,7 @@ const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
       ui.updateAdvStatsTabDropdown(Object.assign({}, response))
+      $('#advStatsTabDropdownContent a').on('click', loadAdvStatsTab)
       response.adventurers = response.adventurers.filter(adv => adv.is_alive)
       if (response.adventurers && response.adventurers.length > 0) {
         ui.onViewAdventurersSuccess(response)
@@ -101,6 +102,13 @@ const setUpChooseAdventurersTab = function () {
         ui.userHasNoAdventurers()
       }
     })
+}
+
+const loadAdvStatsTab = function (event) {
+  const advDropdownId = $(this).attr('data-id')
+  api.showAdventurer(advDropdownId)
+    .then(ui.updateAdvTab)
+    .catch(ui.onShowAdventurerFailure)
 }
 
 const clearModalFormOnHide = function (event) {

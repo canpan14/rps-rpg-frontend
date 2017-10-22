@@ -1,7 +1,9 @@
-button:focus,
-button:active {
-  box-shadow: none;
-  outline: none;
+button {
+  &:focus,
+  &:active {
+    box-shadow: none;
+    outline: none;
+  }
 }
 
 .scrollable-menu {

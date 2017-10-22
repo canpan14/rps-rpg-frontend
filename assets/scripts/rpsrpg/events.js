@@ -92,6 +92,7 @@ const continueGameWithAdventurer = function (event) {
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
+      ui.updateAdvStatsTabDropdown(Object.assign({}, response))
       response.adventurers = response.adventurers.filter(adv => adv.is_alive)
       if (response.adventurers && response.adventurers.length > 0) {
         ui.onViewAdventurersSuccess(response)

@@ -1,13 +1,10 @@
 <div class="table-responsive" id="adventurersTableContainer">
-  <table class="table table-hover" id="myAdventurers">
+  <table class="table table-hover table-border table-striped" id="myAdventurers">
     <thead>
       <tr>
         <th>Name</th>
         <th>Level</th>
-        <th>Current Exp</th>
-        <th>Exp Needed</th>
         <th>Date Created</th>
-        <th>Is Alive</th>
       </tr>
     </thead>
     <tbody>
@@ -15,11 +12,8 @@
       <tr id="{{adv.id}}">
         <td>{{adv.name}}</td>
         <td>{{adv.level.number}}</td>
-        <td>{{adv.current_exp}}</td>
-        <td>{{adv.level.exp_needed}}</td>
         <td>{{adv.date_created}}</td>
-        <td>{{adv.is_alive}}</td>
-      <tr>
+      </tr>
       {{/each}}
     </tbody>
   </table>

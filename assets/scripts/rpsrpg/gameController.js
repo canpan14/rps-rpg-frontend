@@ -42,6 +42,18 @@ const playerAction = function (moveChoice) {
     return
   }
 
+  switch (moveChoice) {
+    case 'rock':
+      currentAdventurer.rockCount++
+      break
+    case 'paper':
+      currentAdventurer.paperCount++
+      break
+    case 'scissor':
+      currentAdventurer.scissorCount++
+      break
+  }
+
   const enemyChoice = enemyAction()
   switch (roundResult(moveChoice, enemyChoice)) {
     case 'player':

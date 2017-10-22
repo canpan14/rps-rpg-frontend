@@ -82,7 +82,10 @@ const updateAdventurer = function (advId, adv) {
       'adventurer': {
         'level_id': adv.level,
         'current_exp': adv.currentExp,
-        'is_alive': adv.isAlive
+        'is_alive': adv.isAlive,
+        'rock_count': adv.rockCount,
+        'paper_count': adv.paperCount,
+        'scissor_count': adv.scissorCount
       }
     }
   })

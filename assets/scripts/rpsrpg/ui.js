@@ -1,6 +1,7 @@
 'use strict'
 
 const store = require('../store')
+const UserStats = require('./userStats')
 const advTableHandlebar = require('../templates/adventurerTable.handlebars')
 const encounterHandlebar = require('../templates/encounter.handlebars')
 const adventurerInfoHandlebar = require('../templates/adventurerInfo.handlebars')
@@ -10,6 +11,7 @@ const adventurerDiesHandlebar = require('../templates/adventurerDies.handlebars'
 const enemyDiesHandlebar = require('../templates/enemyDies.handlebars')
 const advStatsTabDropdownHandlebar = require('../templates/advStatsTabDropdown.handlebars')
 const advTabHandlebar = require('../templates/advStatsTab.handlebars')
+const userStatsTableHandlebar = require('../templates/userStatsTable.handlebars')
 
 const onSignInSuccess = function (response) {
   $('#signInModal').modal('hide')
@@ -121,6 +123,20 @@ const updateAdvTab = function (response) {
   $('#advStats').append(advTabHandlebar(response.adventurer))
 }
 
+const updateUserStatsTab = function (response) {
+  const userStatsHolder = UserStats.createUserStats()
+  const advList = response.adventurers
+  userStatsHolder.created = advList.length
+  userStatsHolder.alive = advList.filter(adv => adv.is_alive).length
+  userStatsHolder.dead = advList.filter(adv => !adv.is_alive).length
+  userStatsHolder.highestLevel = advList.reduce((a, b) => a > b.level.number ? a : b.level.number, 0)
+  userStatsHolder.rockCount = advList.reduce((a, b) => a + b.rock_count, 0)
+  userStatsHolder.paperCount = advList.reduce((a, b) => a + b.paper_count, 0)
+  userStatsHolder.scissorCount = advList.reduce((a, b) => a + b.scissor_count, 0)
+  $('#userStats').empty()
+  $('#userStats').append(userStatsTableHandlebar(userStatsHolder))
+}
+
 const userHasNoAdventurers = function () {
   $('#chooseAdv').empty()
   $('#chooseAdv').append(noAdvYetHandlebar())
@@ -208,6 +224,7 @@ module.exports = {
   updateEndRoundMessage,
   updateAdvStatsTabDropdown,
   updateAdvTab,
+  updateUserStatsTab,
   userHasNoAdventurers,
   setUpMainGameTab,
   playerDies,

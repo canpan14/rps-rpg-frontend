@@ -89,6 +89,12 @@ const continueGameWithAdventurer = function (event) {
     .catch(ui.onShowAdventurerFailure)
 }
 
+const setUpUserStatsTab = function () {
+  api.viewAdventurers()
+    .then(ui.updateUserStatsTab)
+    .catch(ui.onViewAdventurersFailure)
+}
+
 const setUpChooseAdventurersTab = function () {
   onViewAdventurers()
     .then((response) => {
@@ -132,6 +138,7 @@ const registerHandlers = function () {
     $('#continueOnAdventure').off('click')
     $('#continueOnAdventure').on('click', continueGameWithAdventurer)
   })
+  $('#userStatsTab').on('shown.bs.tab', setUpUserStatsTab)
 }
 
 module.exports = {

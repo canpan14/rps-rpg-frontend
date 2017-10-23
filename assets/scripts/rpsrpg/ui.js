@@ -14,6 +14,7 @@ const advTabHandlebar = require('../templates/advStatsTab.handlebars')
 const userStatsTableHandlebar = require('../templates/userStatsTable.handlebars')
 
 const onSignInSuccess = function (response) {
+  $('#startScreen').collapse('hide')
   $('#signInModal').modal('hide')
   greenNotification('Signed in successfully')
   store.user = response.user
@@ -40,6 +41,7 @@ const onSignOutSuccess = function () {
   $('#endRoundMessage').empty()
   $('.activeAfterSignIn').hide()
   $('.activeBeforeSignIn').show()
+  $('#startScreen').collapse('show')
 }
 
 const onSignOutFailure = function () {

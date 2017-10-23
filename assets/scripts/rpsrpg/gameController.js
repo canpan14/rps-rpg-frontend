@@ -7,6 +7,7 @@ const enemyGenerator = require('./enemyGenerator')
 
 let currentAdventurer
 let currentEnemy
+let saveState
 let roundResultText
 let fightOver = true
 
@@ -18,8 +19,18 @@ const startGame = function (advInfo) {
   // load match in
   // if no match, start a new one (or if load fails)
   currentAdventurer = Adventurer.createAdventurer(advInfo.adventurer)
-  ui.updateAdventurerInfo(currentAdventurer)
-  newEncounter()
+  saveState = currentAdventurer.saveState
+  console.log(currentAdventurer)
+  console.log(saveState)
+  if (saveState.inFight) {
+    currentAdventurer.health = saveState.advHealth
+    currentAdventurer.attack = saveState.advAttack
+    ui.updateAdventurerInfo(currentAdventurer)
+    loadEncounter()
+  } else {
+    ui.updateAdventurerInfo(currentAdventurer)
+    newEncounter()
+  }
 }
 
 const newEncounter = function () {
@@ -32,12 +43,14 @@ const newEncounter = function () {
     })
 }
 
+const loadEncounter = function () {
+  fightOver = false
+  ui.updateEndRoundMessage('')
+  currentEnemy = saveState.enemy
+  ui.updateEncounter(currentEnemy)
+}
+
 const playerAction = function (moveChoice) {
-  // Player chooses action
-  // Enemy chooses action
-  // Update player choice stats (future)
-  // Resolve depending on result
-  // End encounter/kill player if player/enemy health hits 0 or below
   if (fightOver) {
     return
   }

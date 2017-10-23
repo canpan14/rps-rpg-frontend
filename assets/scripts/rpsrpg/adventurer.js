@@ -1,5 +1,7 @@
 'use strict'
 
+const State = require('./state')
+
 const Adventurer = function (adv) {
   this.id = adv.id
   this.name = adv.name
@@ -13,6 +15,7 @@ const Adventurer = function (adv) {
   this.paperCount = parseInt(adv.paper_count)
   this.scissorCount = parseInt(adv.scissor_count)
   this.kills = parseInt(adv.kills)
+  this.saveState = State.createState(adv.state)
 }
 
 const createAdventurer = function (adv) {

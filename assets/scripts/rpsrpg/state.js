@@ -1,5 +1,7 @@
 'use strict'
 
+const Enemy = require('./enemy')
+
 const State = function (state) {
   this.advHealth = parseInt(state.a_health)
   this.advAttack = parseInt(state.a_attack)
@@ -13,6 +15,7 @@ const State = function (state) {
   this.enemyPaperChance = parseFloat(state.e_paper_chance)
   this.enemyScissorChance = parseFloat(state.e_scissor_chance)
   this.enemyLearningCurve = parseFloat(state.e_learning_curve)
+  this.enemy = Enemy.createEnemyFromSave(state)
 }
 
 const createState = function (state) {

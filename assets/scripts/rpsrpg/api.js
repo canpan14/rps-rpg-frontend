@@ -112,6 +112,32 @@ const viewEnemyModifiers = function () {
   })
 }
 
+const saveState = function (save) {
+  return $.ajax({
+    url: config.apiOrigin + 'states/' + save.id,
+    method: 'PATCH',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    },
+    data: {
+      'state': {
+        'a_health': save.advHealth,
+        'a_attack': save.advAttack,
+        'in_fight': save.inFight,
+        'e_name': save.enemy.name,
+        'e_level': save.enemy.level,
+        'e_exp': save.enemy.exp,
+        'e_attack': save.enemy.attack,
+        'e_health': save.enemy.health,
+        'e_rock_chance': save.enemy.rockChance,
+        'e_paper_chance': save.enemy.paperChance,
+        'e_scissor_chance': save.enemy.scissorChance,
+        'e_learning_curve': save.enemy.learningCurve
+      }
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
@@ -122,5 +148,6 @@ module.exports = {
   showAdventurer,
   updateAdventurer,
   viewEnemies,
-  viewEnemyModifiers
+  viewEnemyModifiers,
+  saveState
 }

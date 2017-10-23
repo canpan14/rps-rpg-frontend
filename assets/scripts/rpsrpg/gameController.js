@@ -14,14 +14,8 @@ let fightOver = true
 const getCurrentAdventurerId = () => currentAdventurer.id
 
 const startGame = function (advInfo) {
-  // load in adv info where needed
-  // check for previous match
-  // load match in
-  // if no match, start a new one (or if load fails)
   currentAdventurer = Adventurer.createAdventurer(advInfo.adventurer)
   saveState = currentAdventurer.saveState
-  console.log(currentAdventurer)
-  console.log(saveState)
   if (saveState.inFight) {
     currentAdventurer.health = saveState.advHealth
     currentAdventurer.attack = saveState.advAttack
@@ -34,11 +28,14 @@ const startGame = function (advInfo) {
 }
 
 const newEncounter = function () {
-  fightOver = false
   ui.updateEndRoundMessage('')
   enemyGenerator.generateEnemy()
     .then((enemyGenerated) => {
+      fightOver = false
       currentEnemy = enemyGenerated
+      saveState.enemy = currentEnemy
+      updateSaveState()
+      saveCurrentState()
       ui.updateEncounter(currentEnemy)
     })
 }
@@ -48,6 +45,27 @@ const loadEncounter = function () {
   ui.updateEndRoundMessage('')
   currentEnemy = saveState.enemy
   ui.updateEncounter(currentEnemy)
+}
+
+const updateSaveState = function () {
+  saveState.inFight = !fightOver
+  saveState.advHealth = currentAdventurer.health
+  saveState.advAttack = currentAdventurer.attack
+  saveState.enemy.name = currentEnemy.name
+  saveState.enemy.level = currentEnemy.level
+  saveState.enemy.exp = currentEnemy.exp
+  saveState.enemy.health = currentEnemy.health
+  saveState.enemy.attack = currentEnemy.attack
+  saveState.enemy.rockChance = currentEnemy.rockChance
+  saveState.enemy.paperChance = currentEnemy.paperChance
+  saveState.enemy.scissorChance = currentEnemy.scissorChance
+  saveState.enemy.learningCurve = currentEnemy.learningCurve
+}
+
+const saveCurrentState = function () {
+  api.saveState(saveState)
+    .then(ui.onSaveStateSuccess)
+    .catch(ui.onSaveStateFailure)
 }
 
 const playerAction = function (moveChoice) {
@@ -86,6 +104,8 @@ const playerAction = function (moveChoice) {
   } else {
     adjustEnemyWeights(moveChoice)
   }
+  updateSaveState()
+  saveCurrentState()
 }
 
 const enemyAction = function () {

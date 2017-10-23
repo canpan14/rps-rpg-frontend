@@ -16,16 +16,20 @@ const createEnemy = function (enemy) {
   return new Enemy(enemy)
 }
 
-const createEnemyFromSave = function (save) {
-  this.name = save.name
+const EnemyFromSave = function (save) {
+  this.name = save.e_name
   this.level = parseInt(save.e_level)
-  this.exp = parseInt(save.e_exmp)
+  this.exp = parseInt(save.e_exp)
   this.attack = parseInt(save.e_attack)
   this.health = parseInt(save.e_health)
   this.rockChance = parseFloat(save.e_rock_chance)
   this.paperChance = parseFloat(save.e_paper_chance)
   this.scissorChance = parseFloat(save.e_scissor_chance)
   this.learningCurve = parseFloat(save.e_learning_curve)
+}
+
+const createEnemyFromSave = function (enemy) {
+  return new EnemyFromSave(enemy)
 }
 
 module.exports = {

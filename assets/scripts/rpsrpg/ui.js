@@ -128,8 +128,8 @@ const updateAdvTab = function (response) {
 
 const updateUserStatsTab = function (response) {
   const userStatsHolder = UserStats.createUserStats()
-  const advList = response.adventurers
-  if (response.adventurers.length > 0) {
+  if (response.adventurers) {
+    const advList = response.adventurers
     userStatsHolder.created = advList.length
     userStatsHolder.alive = advList.filter(adv => adv.is_alive).length
     userStatsHolder.dead = advList.filter(adv => !adv.is_alive).length

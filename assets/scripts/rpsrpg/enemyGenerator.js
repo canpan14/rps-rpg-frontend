@@ -5,9 +5,12 @@ const Modifier = require('./modifier')
 const Enemy = require('./enemy')
 
 let enemyToGenerate
+let levelToGenerateAs
 
-const generateEnemy = function () {
+const generateEnemy = function (level) {
+  levelToGenerateAs = level
   return baseEnemy()
+    .then(adjustLevel)
     .then(adjustEnemyForPrefix)
     .then(adjustEnemyForSuffix)
     .then(normalizeWeights)
@@ -24,6 +27,16 @@ const baseEnemy = function () {
     })
 }
 
+const adjustLevel = function () {
+  return api.showLevel(levelToGenerateAs)
+    .then((response) => {
+      enemyToGenerate.level = levelToGenerateAs
+      enemyToGenerate.health = response.level.health
+      enemyToGenerate.attack = response.level.attack
+      enemyToGenerate.exp = response.level.number * 4
+    })
+}
+
 const adjustEnemyForPrefix = function () {
   return api.viewEnemyModifiers()
     .then((response) => {
@@ -34,8 +47,8 @@ const adjustEnemyForPrefix = function () {
       enemyToGenerate.paperChance += randomPrefix.paperChance
       enemyToGenerate.scissorChance += randomPrefix.scissorChance
       enemyToGenerate.learningCurve += randomPrefix.learningCurve
-      enemyToGenerate.health = Math.round(enemyToGenerate.health * randomPrefix.healthMult)
-      enemyToGenerate.attack = Math.round(enemyToGenerate.attack * randomPrefix.attackMult)
+      enemyToGenerate.health = enemyToGenerate.health * randomPrefix.healthMult
+      enemyToGenerate.attack = enemyToGenerate.attack * randomPrefix.attackMult
     })
 }
 

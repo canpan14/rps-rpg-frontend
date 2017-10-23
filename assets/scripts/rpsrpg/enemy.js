@@ -3,7 +3,7 @@
 const Enemy = function (enemy) {
   this.name = enemy.name
   this.level = parseInt(enemy.level.number)
-  this.exp = parseInt(enemy.level.number * 3)
+  this.exp = parseInt(enemy.level.number * 4)
   this.attack = parseInt(enemy.level.attack)
   this.health = parseInt(enemy.level.health)
   this.rockChance = parseFloat(enemy.rock_chance)

@@ -4,6 +4,7 @@ const api = require('./api')
 const ui = require('./ui')
 const Adventurer = require('./adventurer')
 const enemyGenerator = require('./enemyGenerator')
+const weightAdjustor = require('./weightAdjustor')
 
 let currentAdventurer
 let currentEnemy
@@ -29,7 +30,7 @@ const startGame = function (advInfo) {
 
 const newEncounter = function () {
   ui.updateEndRoundMessage('')
-  enemyGenerator.generateEnemy()
+  enemyGenerator.generateEnemy(currentAdventurer.level)
     .then((enemyGenerated) => {
       fightOver = false
       currentEnemy = enemyGenerated
@@ -102,14 +103,25 @@ const playerAction = function (moveChoice) {
   } else if (currentAdventurer.health <= 0) {
     playerDies()
   } else {
-    adjustEnemyWeights(moveChoice)
+    adjustWeights(moveChoice)
   }
   updateSaveState()
   saveCurrentState()
 }
 
+const adjustWeights = function (moveChoice) {
+  const newWeights = weightAdjustor.adjustEnemyWeights(moveChoice, {
+    'rockChance': currentEnemy.rockChance,
+    'paperChance': currentEnemy.paperChance,
+    'scissorChance': currentEnemy.scissorChance
+  })
+  currentEnemy.rockChance = newWeights.rockChance
+  currentEnemy.paperChance = newWeights.paperChance
+  currentEnemy.scissorChance = newWeights.scissorChance
+}
+
 const enemyAction = function () {
-  const actionToTake = weightedRandomAttack({'rock': currentEnemy.rockChance,
+  const actionToTake = weightAdjustor.weightedRandomAttack({'rock': currentEnemy.rockChance,
     'paper': currentEnemy.paperChance,
     'scissor': currentEnemy.scissorChance})
   return actionToTake
@@ -178,50 +190,6 @@ const updateAdventurerOnServer = function () {
       ui.updateAdventurerInfo(currentAdventurer)
     })
     .catch((error) => console.log(error))
-}
-
-/**
- * Returns random hash key based on weights
- * https://stackoverflow.com/questions/8435183/generate-a-weighted-random-number
- * @param  {[type]} weightHash Weight hash in the form {key: 0 to 1 chance}
- * @return {[type]}            Random key
- */
-const weightedRandomAttack = function (weightHash) {
-  let sum = 0
-  const r = Math.random()
-  for (const i in weightHash) {
-    sum += weightHash[i]
-    if (r <= sum) return i
-  }
-}
-
-const adjustEnemyWeights = function (playerMove) {
-  const learningCurve = 0.1
-  let addToCounter = 0.0
-  let subtractFromLoser = 0.0
-  switch (playerMove) {
-    case 'rock':
-      addToCounter = (1 - currentEnemy.paperChance) * learningCurve
-      subtractFromLoser = (currentEnemy.scissorChance) * learningCurve
-      currentEnemy.paperChance += addToCounter
-      currentEnemy.scissorChance -= subtractFromLoser
-      currentEnemy.rockChance += subtractFromLoser - addToCounter
-      break
-    case 'paper':
-      addToCounter = (1 - currentEnemy.scissorChance) * learningCurve
-      subtractFromLoser = (currentEnemy.rockChance) * learningCurve
-      currentEnemy.scissorChance += addToCounter
-      currentEnemy.rockChance -= subtractFromLoser
-      currentEnemy.paperChance += subtractFromLoser - addToCounter
-      break
-    case 'scissor':
-      addToCounter = (1 - currentEnemy.rockChance) * learningCurve
-      subtractFromLoser = (currentEnemy.paperChance) * learningCurve
-      currentEnemy.rockChance += addToCounter
-      currentEnemy.paperChance -= subtractFromLoser
-      currentEnemy.scissorChance += subtractFromLoser - addToCounter
-      break
-  }
 }
 
 module.exports = {

@@ -138,6 +138,16 @@ const saveState = function (save) {
   })
 }
 
+const showLevel = function (level) {
+  return $.ajax({
+    url: config.apiOrigin + 'levels/' + level,
+    method: 'GET',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 module.exports = {
   signIn,
   signOut,
@@ -149,5 +159,6 @@ module.exports = {
   updateAdventurer,
   viewEnemies,
   viewEnemyModifiers,
-  saveState
+  saveState,
+  showLevel
 }

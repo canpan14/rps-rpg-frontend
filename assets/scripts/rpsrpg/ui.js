@@ -129,14 +129,16 @@ const updateAdvTab = function (response) {
 const updateUserStatsTab = function (response) {
   const userStatsHolder = UserStats.createUserStats()
   const advList = response.adventurers
-  userStatsHolder.created = advList.length
-  userStatsHolder.alive = advList.filter(adv => adv.is_alive).length
-  userStatsHolder.dead = advList.filter(adv => !adv.is_alive).length
-  userStatsHolder.highestLevel = advList.reduce((a, b) => a > b.level.number ? a : b.level.number, 0)
-  userStatsHolder.kills = advList.reduce((a, b) => a + b.kills, 0)
-  userStatsHolder.rockCount = advList.reduce((a, b) => a + b.rock_count, 0)
-  userStatsHolder.paperCount = advList.reduce((a, b) => a + b.paper_count, 0)
-  userStatsHolder.scissorCount = advList.reduce((a, b) => a + b.scissor_count, 0)
+  if (response.adventurers.length > 0) {
+    userStatsHolder.created = advList.length
+    userStatsHolder.alive = advList.filter(adv => adv.is_alive).length
+    userStatsHolder.dead = advList.filter(adv => !adv.is_alive).length
+    userStatsHolder.highestLevel = advList.reduce((a, b) => a > b.level.number ? a : b.level.number, 0)
+    userStatsHolder.kills = advList.reduce((a, b) => a + b.kills, 0)
+    userStatsHolder.rockCount = advList.reduce((a, b) => a + b.rock_count, 0)
+    userStatsHolder.paperCount = advList.reduce((a, b) => a + b.paper_count, 0)
+    userStatsHolder.scissorCount = advList.reduce((a, b) => a + b.scissor_count, 0)
+  }
   $('#userStats').empty()
   $('#userStats').append(userStatsTableHandlebar(userStatsHolder))
 }

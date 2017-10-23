@@ -4,18 +4,17 @@ const api = require('./api')
 const Modifier = require('./modifier')
 const Enemy = require('./enemy')
 
-let enemyToGenerate
 let levelToGenerateAs
 
 const generateEnemy = function (level) {
   levelToGenerateAs = level
   return baseEnemy()
     .then(adjustLevel)
+    .then(allocateStatPoints)
     .then(adjustEnemyForPrefix)
     .then(adjustEnemyForSuffix)
-    .then(normalizeWeights)
-    .then(() => {
-      return enemyToGenerate
+    .then((enemy) => {
+      return normalizeWeights(enemy)
     })
 }
 
@@ -23,57 +22,74 @@ const baseEnemy = function () {
   return api.viewEnemies()
     .then((response) => {
       const enemies = response.enemies
-      enemyToGenerate = Enemy.createEnemy(enemies[Math.floor(Math.random() * enemies.length)])
+      const enemy = Enemy.createEnemy(enemies[Math.floor(Math.random() * enemies.length)])
+      return enemy
     })
 }
 
-const adjustLevel = function () {
+const adjustLevel = function (enemy) {
   return api.showLevel(levelToGenerateAs)
     .then((response) => {
-      enemyToGenerate.level = levelToGenerateAs
-      enemyToGenerate.health = response.level.health
-      enemyToGenerate.attack = response.level.attack
-      enemyToGenerate.exp = response.level.number * 4
+      enemy.level = levelToGenerateAs
+      enemy.health = response.level.health
+      enemy.attack = response.level.attack
+      enemy.exp = response.level.number * 4
+      return enemy
     })
 }
 
-const adjustEnemyForPrefix = function () {
+const allocateStatPoints = function (enemy) {
+  for (let i = 0; i < 10; i++) {
+    if (Math.random() < 0.5) {
+      enemy.health += 2
+    } else {
+      enemy.attack += 1
+    }
+  }
+  return enemy
+}
+
+const adjustEnemyForPrefix = function (enemy) {
   return api.viewEnemyModifiers()
     .then((response) => {
       const prefixArray = response.enemy_modifiers.filter(modifier => modifier.is_prefix === true)
       const randomPrefix = Modifier.createModifier(prefixArray[Math.floor(Math.random() * prefixArray.length)])
-      enemyToGenerate.name = randomPrefix.name + ' ' + enemyToGenerate.name
-      enemyToGenerate.rockChance += randomPrefix.rockChance
-      enemyToGenerate.paperChance += randomPrefix.paperChance
-      enemyToGenerate.scissorChance += randomPrefix.scissorChance
-      enemyToGenerate.learningCurve += randomPrefix.learningCurve
-      enemyToGenerate.health = enemyToGenerate.health * randomPrefix.healthMult
-      enemyToGenerate.attack = enemyToGenerate.attack * randomPrefix.attackMult
+      enemy.name = randomPrefix.name + ' ' + enemy.name
+      enemy.rockChance += randomPrefix.rockChance
+      enemy.paperChance += randomPrefix.paperChance
+      enemy.scissorChance += randomPrefix.scissorChance
+      enemy.learningCurve += randomPrefix.learningCurve
+      enemy.health = enemy.health * randomPrefix.healthMult
+      enemy.attack = enemy.attack * randomPrefix.attackMult
+      return enemy
     })
 }
 
-const adjustEnemyForSuffix = function () {
+const adjustEnemyForSuffix = function (enemy) {
   return api.viewEnemyModifiers()
     .then((response) => {
       const suffixArray = response.enemy_modifiers.filter(modifier => modifier.is_prefix === false)
       const randomSuffix = Modifier.createModifier(suffixArray[Math.floor(Math.random() * suffixArray.length)])
-      enemyToGenerate.name = enemyToGenerate.name + ' ' + randomSuffix.name
-      enemyToGenerate.rockChance += randomSuffix.rockChance
-      enemyToGenerate.paperChance += randomSuffix.paperChance
-      enemyToGenerate.scissorChance += randomSuffix.scissorChance
-      enemyToGenerate.learningCurve += randomSuffix.learningCurve
-      enemyToGenerate.health = Math.round(enemyToGenerate.health * randomSuffix.healthMult)
-      enemyToGenerate.attack = Math.round(enemyToGenerate.attack * randomSuffix.attackMult)
+      enemy.name = enemy.name + ' ' + randomSuffix.name
+      enemy.rockChance += randomSuffix.rockChance
+      enemy.paperChance += randomSuffix.paperChance
+      enemy.scissorChance += randomSuffix.scissorChance
+      enemy.learningCurve += randomSuffix.learningCurve
+      enemy.health = Math.round(enemy.health * randomSuffix.healthMult)
+      enemy.attack = Math.round(enemy.attack * randomSuffix.attackMult)
+      return enemy
     })
 }
 
-const normalizeWeights = function () {
-  const weights = [enemyToGenerate.rockChance, enemyToGenerate.paperChance, enemyToGenerate.scissorChance]
+const normalizeWeights = function (enemy) {
+  console.log(enemy)
+  const weights = [enemy.rockChance, enemy.paperChance, enemy.scissorChance]
   const total = weights.reduce((a, b) => a + b)
   const normWeights = weights.map(v => v / total)
-  enemyToGenerate.rockChance = normWeights[0]
-  enemyToGenerate.paperChance = normWeights[1]
-  enemyToGenerate.scissorChance = normWeights[2]
+  enemy.rockChance = normWeights[0]
+  enemy.paperChance = normWeights[1]
+  enemy.scissorChance = normWeights[2]
+  return enemy
 }
 
 module.exports = {

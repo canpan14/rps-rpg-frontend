@@ -41,6 +41,8 @@ const onSignUp = function (event) {
 const onCreateAdventurer = function (event) {
   event.preventDefault()
   const formData = getFormFields(event.target)
+  formData.adventurer.attack_stat_points = 5
+  formData.adventurer.health_stat_points = 5
   api.createAdventurer(formData)
     .then(ui.onCreateAdventurerSuccess)
     .then(setUpChooseAdventurersTab)

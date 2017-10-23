@@ -31,6 +31,7 @@ const onSignOutSuccess = function () {
   delete store.user
   $('#collapseTabs').collapse('hide')
   $('#goAdventuringTab').addClass('disabled')
+  $('#advStatsTab').addClass('disabled')
   $('#chooseAdv').empty()
   $('#mainGame').empty()
   $('#chooseAdventurerTab').tab('show')
@@ -117,6 +118,7 @@ const updateAdvStatsTabDropdown = function (response) {
   })
   $('#advStatsTabDropdownContent').empty()
   $('#advStatsTabDropdownContent').append(advStatsTabDropdownHandlebar(response))
+  $('#advStatsTab').removeClass('disabled')
 }
 
 const updateAdvTab = function (response) {
@@ -142,6 +144,7 @@ const updateUserStatsTab = function (response) {
 const userHasNoAdventurers = function () {
   $('#chooseAdv').empty()
   $('#chooseAdv').append(noAdvYetHandlebar())
+  $('#advStatsTab').addClass('disabled')
 }
 
 const setUpMainGameTab = function () {

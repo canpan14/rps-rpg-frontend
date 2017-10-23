@@ -101,11 +101,10 @@ const setUpChooseAdventurersTab = function () {
   if (!store.user) return
   onViewAdventurers()
     .then((response) => {
-      console.log(response)
-      ui.updateAdvStatsTabDropdown(Object.assign({}, response))
-      $('#advStatsTabDropdownContent a').on('click', loadAdvStatsTab)
-      response.adventurers = response.adventurers.filter(adv => adv.is_alive)
       if (response.adventurers && response.adventurers.length > 0) {
+        ui.updateAdvStatsTabDropdown(Object.assign({}, response))
+        $('#advStatsTabDropdownContent a').on('click', loadAdvStatsTab)
+        response.adventurers = response.adventurers.filter(adv => adv.is_alive)
         ui.onViewAdventurersSuccess(response)
         $('#myAdventurers > tbody > tr').on('click', onStartGameWithAdventurer)
       } else {

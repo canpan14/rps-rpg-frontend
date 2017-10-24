@@ -27,6 +27,7 @@ Frontend
 - SASS, CSS
 - Bootstrap
 - Bootstrap-notify
+
 Backend
 - Ruby
 - Rails

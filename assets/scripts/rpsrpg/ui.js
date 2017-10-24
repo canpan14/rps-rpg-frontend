@@ -156,9 +156,9 @@ const setUpMainGameTab = function () {
   $('#mainGame').append(mainGameTabHandlebar())
 }
 
-const playerDies = function () {
+const playerDies = function (adv) {
   $('#mainGame').empty()
-  $('#mainGame').append(adventurerDiesHandlebar())
+  $('#mainGame').append(adventurerDiesHandlebar(adv))
   $('#chooseAdvFromDead').on('click', () => $('#chooseAdventurerTab').tab('show'))
 }
 

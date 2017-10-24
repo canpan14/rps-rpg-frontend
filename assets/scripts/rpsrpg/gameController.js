@@ -172,7 +172,7 @@ const enemyDies = function () {
 const playerDies = function () {
   fightOver = true
   currentAdventurer.isAlive = false
-  ui.playerDies()
+  ui.playerDies(currentAdventurer)
   updateAdventurerOnServer()
 }
 

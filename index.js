@@ -2,8 +2,9 @@
 
 // load manifests
 // scripts
-import 'bootstrap'
-import 'bootstrap-notify'
+window.Popper = require('popper.js')
+require('bootstrap')
+require('bootstrap-notify')
 require('./assets/scripts/index.js')
 
 // styles

@@ -10,5 +10,6 @@ $(() => {
 const events = require('./rpsrpg/events')
 
 $(() => {
+  $('[data-toggle="tooltip"]').tooltip()
   events.registerHandlers()
 })

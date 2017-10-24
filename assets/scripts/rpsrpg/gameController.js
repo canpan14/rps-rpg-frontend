@@ -189,7 +189,7 @@ const updateAdventurerOnServer = function () {
       currentAdventurer = Adventurer.createAdventurer(response.adventurer)
       ui.updateAdventurerInfo(currentAdventurer)
     })
-    .catch((error) => console.log(error))
+    .catch(ui.onUpdateAdventurerFailure)
 }
 
 module.exports = {

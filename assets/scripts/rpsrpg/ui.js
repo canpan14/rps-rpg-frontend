@@ -104,6 +104,10 @@ const onResetAccountFailure = function () {
   redNotification('Failed to reset account, try again later')
 }
 
+const onUpdateAdventurerFailure = function () {
+  redNotification('Error saving adventurer')
+}
+
 const updateEncounter = function (enemy) {
   $('#encounterInfo').empty()
   $('#encounterInfo').append(encounterHandlebar(enemy))
@@ -241,6 +245,7 @@ module.exports = {
   onShowAdventurerFailure,
   onResetAccountSuccess,
   onResetAccountFailure,
+  onUpdateAdventurerFailure,
   updateEncounter,
   updateRoundResult,
   updateAdventurerInfo,

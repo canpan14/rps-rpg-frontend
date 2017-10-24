@@ -1,8 +1,11 @@
 # Rock Paper Scissor the Role Playing Game
 
 Link to website: https://canpan14.github.io/rps-rpg-frontend/
+
 Link to frontend repo: https://github.com/canpan14/rps-rpg-frontend
+
 Link to backend repo: https://github.com/canpan14/rps-rpg-backend
+
 Link to backend deploy site: https://rps-rpg.herokuapp.com/
 
 ## What is RPS the RPG?
@@ -89,4 +92,5 @@ They are from the initial thought of the app (also contains a little extra stuff
 
 ## ERD Diagram
 Made using https://erdplus.com/
+
 ERD: https://i.imgur.com/4e5hMCg.png

@@ -126,18 +126,50 @@ const clearModalFormOnHide = function (event) {
   ui.clearModalFormOnHide(event)
 }
 
+const resetAccount = function (event) {
+  event.preventDefault()
+  api.viewAdventurers()
+    .then((response) => {
+      Promise.all(response.adventurers.map(adv => {
+        api.destroyState(adv.state.id)
+          .catch(resetAccountError)
+      }))
+      return response
+    })
+    .then(resetAccountSuccess)
+    .catch(resetAccountError)
+}
+
+const resetAccountError = function () {
+  setTimeout(() => {
+    ui.onResetAccountFailure()
+    setUpChooseAdventurersTab()
+  }, 100)
+}
+
+const resetAccountSuccess = function () {
+  setTimeout(() => {
+    ui.onResetAccountSuccess()
+    setUpChooseAdventurersTab()
+  }, 100)
+}
+
 const registerHandlers = function () {
+  // Nav and form events
   $('#signIn').on('submit', onSignIn)
   $('#signUp').on('submit', onSignUp)
   $('#changePassword').on('submit', onChangePassword)
   $('#signOut').on('click', onSignOut)
   $('#createAdventurer').on('submit', onCreateAdventurer)
+  $('#resetAccount').on('click', resetAccount)
 
+  // Modal hidden events
   $('#signInModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#signUpModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#changePasswordModal').on('hidden.bs.modal', clearModalFormOnHide)
   $('#createAdventurerModal').on('hidden.bs.modal', clearModalFormOnHide)
 
+  // Tab events
   $('#chooseAdventurerTab').on('shown.bs.tab', setUpChooseAdventurersTab)
   $('#mainGame').on('DOMSubtreeModified', () => {
     $('#continueOnAdventure').off('click')

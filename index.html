@@ -29,6 +29,9 @@
             <li class="activeAfterSignIn nav-item" style="display:none">
               <a class="nav-link" data-toggle="modal" href="#changePasswordModal">Change Password</a>
             </li>
+            <li class="activeAfterSignIn nav-item" style="display:none">
+              <a class="nav-link" data-toggle="modal" href="#confirmResetModal">Reset Account</a>
+            </li>
             <li class="activeAfterSignIn nav-item active" style="display:none">
               <a class="nav-link" id="signOut">Sign Out</a>
             </li>
@@ -38,7 +41,7 @@
 
       <!-- Prelogin Start Screen -->
       <div class="collapse container-fluid show start-screen" id="startScreen">
-        <div class="text-center">
+        <div class="text-center mt-1">
           <h3>Rock Paper Scissors</h3>
           <h5>The Role Playing Game</h5>
           <p>The gods have decreed that they will be accepting a new member into their ranks.</p>
@@ -214,6 +217,26 @@
                 <button type="submit" class="btn btn-primary">Start Adventure</button>
               </div>
             </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="confirmResetModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Reset User Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Confirm that you want to delete all data on this account. This will permanently remove all adventurers and account statistics.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="resetAccount">Confirm Reset</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
           </div>
         </div>
       </div>

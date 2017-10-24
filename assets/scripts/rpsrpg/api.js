@@ -92,6 +92,16 @@ const updateAdventurer = function (advId, adv) {
   })
 }
 
+const destroyAdventurer = function (advId) {
+  return $.ajax({
+    url: config.apiOrigin + 'adventurers/' + advId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const viewEnemies = function () {
   return $.ajax({
     url: config.apiOrigin + 'enemies',
@@ -138,6 +148,16 @@ const saveState = function (save) {
   })
 }
 
+const destroyState = function (stateId) {
+  return $.ajax({
+    url: config.apiOrigin + 'states/' + stateId,
+    method: 'DELETE',
+    headers: {
+      Authorization: 'Token token=' + store.user.token
+    }
+  })
+}
+
 const showLevel = function (level) {
   return $.ajax({
     url: config.apiOrigin + 'levels/' + level,
@@ -157,8 +177,10 @@ module.exports = {
   viewAdventurers,
   showAdventurer,
   updateAdventurer,
+  destroyAdventurer,
   viewEnemies,
   viewEnemyModifiers,
   saveState,
+  destroyState,
   showLevel
 }

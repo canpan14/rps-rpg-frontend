@@ -92,6 +92,18 @@ const onShowAdventurerFailure = function () {
   redNotification('Failed to load adventurer, try again later')
 }
 
+const onResetAccountSuccess = function () {
+  $('#chooseAdv').empty()
+  $('#confirmResetModal').modal('hide')
+  greenNotification('Account was reset successfully')
+}
+
+const onResetAccountFailure = function () {
+  $('#chooseAdv').empty()
+  $('#confirmResetModal').modal('hide')
+  redNotification('Failed to reset account, try again later')
+}
+
 const updateEncounter = function (enemy) {
   $('#encounterInfo').empty()
   $('#encounterInfo').append(encounterHandlebar(enemy))
@@ -227,6 +239,8 @@ module.exports = {
   onViewAdventurersFailure,
   onShowAdventurerSuccess,
   onShowAdventurerFailure,
+  onResetAccountSuccess,
+  onResetAccountFailure,
   updateEncounter,
   updateRoundResult,
   updateAdventurerInfo,

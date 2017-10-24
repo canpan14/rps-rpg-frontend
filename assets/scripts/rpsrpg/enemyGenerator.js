@@ -82,7 +82,6 @@ const adjustEnemyForSuffix = function (enemy) {
 }
 
 const normalizeWeights = function (enemy) {
-  console.log(enemy)
   const weights = [enemy.rockChance, enemy.paperChance, enemy.scissorChance]
   const total = weights.reduce((a, b) => a + b)
   const normWeights = weights.map(v => v / total)

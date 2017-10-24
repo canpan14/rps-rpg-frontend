@@ -130,28 +130,23 @@ const resetAccount = function (event) {
   event.preventDefault()
   api.viewAdventurers()
     .then((response) => {
-      Promise.all(response.adventurers.map(adv => {
-        api.destroyState(adv.state.id)
+      return Promise.all(response.adventurers.map(adv => {
+        return api.destroyState(adv.state.id)
           .catch(resetAccountError)
       }))
-      return response
     })
     .then(resetAccountSuccess)
     .catch(resetAccountError)
 }
 
 const resetAccountError = function () {
-  setTimeout(() => {
-    ui.onResetAccountFailure()
-    setUpChooseAdventurersTab()
-  }, 100)
+  ui.onResetAccountFailure()
+  setUpChooseAdventurersTab()
 }
 
 const resetAccountSuccess = function () {
-  setTimeout(() => {
-    ui.onResetAccountSuccess()
-    setUpChooseAdventurersTab()
-  }, 100)
+  ui.onResetAccountSuccess()
+  setUpChooseAdventurersTab()
 }
 
 const registerHandlers = function () {

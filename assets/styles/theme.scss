@@ -22,6 +22,10 @@ button {
   font-size: 16px;
 }
 
+.btn {
+  box-shadow: 2px 3px 5px rgba(4, 4, 4, 0.3);
+}
+
 .display-stats {
   font-size: 20px;
 }
@@ -32,6 +36,11 @@ button {
 
 .rps-action {
   font-size: 30px;
+  box-shadow: 0px 0px;
+}
+
+.rpg-action-container {
+  box-shadow: 2px 3px 5px rgba(4, 4, 4, 0.3);
 }
 
 .scrollable-menu {

@@ -18,16 +18,16 @@ button {
   }
 }
 
-.nav-tabs {
-  font-weight: bold;
+.badge {
+  font-size: 16px;
 }
 
 .display-stats {
   font-size: 20px;
 }
 
-.badge {
-  font-size: 16px;
+.nav-tabs {
+  font-weight: bold;
 }
 
 .rps-action {
@@ -42,4 +42,8 @@ button {
 
 .start-screen {
   max-width: 430px;
+}
+
+.table {
+  background-color: rgba(248, 249, 250, .62)
 }

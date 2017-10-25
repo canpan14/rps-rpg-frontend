@@ -91,6 +91,13 @@ If the UI is broken in some way:
 ## Wireframes
 They are from the initial thought of the app (also contains a little extra stuff): https://imgur.com/a/zeNo7
 
+## User Stories
+- User can create an account and login
+- User can create a new adventurer
+- User can play through an adventure
+- User can start a new adventure
+- User can save/continue an adventure
+
 ## ERD Diagram
 Made using https://erdplus.com/
 

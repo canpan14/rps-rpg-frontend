@@ -1,9 +1,37 @@
+body {
+  background-color: rgba(255, 255, 255, 0)
+}
+
+html {
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  -webkit-background-size: cover;
+  background-size: cover;
+  background: url('https://i.imgur.com/0u5oKsq.png') no-repeat center center fixed;
+}
+
 button {
   &:focus,
   &:active {
     box-shadow: none;
     outline: none;
   }
+}
+
+.nav-tabs {
+  font-weight: bold;
+}
+
+.display-stats {
+  font-size: 20px;
+}
+
+.badge {
+  font-size: 16px;
+}
+
+.rps-action {
+  font-size: 30px;
 }
 
 .scrollable-menu {

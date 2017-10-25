@@ -141,6 +141,11 @@ const updateAdvStatsTabDropdown = function (response) {
 
 const updateAdvTab = function (response) {
   $('#advStats').empty()
+  if (response.adventurer.is_alive) {
+    response.adventurer.is_alive = 'Alive'
+  } else {
+    response.adventurer.is_alive = 'Dead'
+  }
   $('#advStats').append(advTabHandlebar(response.adventurer))
 }
 

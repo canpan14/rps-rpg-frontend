@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html>
+    <head>
+      <title>RPS RPG</title>
+      <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+      <!-- Do not add `link` tags-->
+      <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
+
+      <!-- Do not add `script` tags-->
+      <script src="public/vendor.js" type="text/javascript" charset="utf-8" defer></script>
+      <script src="public/application.js" type="text/javascript" charset="utf-8" defer></script>
+    </head>
+    <body class="container-fluid px-0">
+      <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <span class="navbar-brand">RPS RPG</span>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <div class="navbar-toggler-icon"></div>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav">
+            <li id="signInNav" class="activeBeforeSignIn nav-item active">
+              <a class="nav-link" data-toggle="modal" href="#signInModal">Sign In</a>
+            </li>
+            <li id="signUpNav" class="activeBeforeSignIn nav-item">
+              <a class="nav-link" data-toggle="modal" href="#signUpModal">Sign Up</a>
+            </li>
+            <li class="activeAfterSignIn nav-item" style="display:none">
+              <a class="nav-link" data-toggle="modal" href="#changePasswordModal">Change Password</a>
+            </li>
+            <li class="activeAfterSignIn nav-item" style="display:none">
+              <a class="nav-link" data-toggle="modal" href="#confirmResetModal">Reset Account</a>
+            </li>
+            <li class="activeAfterSignIn nav-item active" style="display:none">
+              <a class="nav-link" id="signOut">Sign Out</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+
+      <!-- Prelogin Start Screen -->
+      <div class="collapse container-fluid show start-screen" id="startScreen">
+        <div class="text-center mt-1">
+          <h3>Rock Paper Scissors</h3>
+          <h5>The Role Playing Game</h5>
+          <p>The gods have decreed that they will be accepting a new member into their ranks.</p>
+          <p>You have decided it's time to show your worth and lead an adventurer to become without pier in the mortal realm.</p>
+          <p>Beasts and fiends from across the land have gathered to stop you and your adventurer in your quest to achieve ultimate power.</p>
+          <p>Venture forth and produce a champion of Rock Paper Scissor, emerging as one deserving of becoming a god.</p>
+          <a class="btn btn-primary" data-toggle="modal" href="#signInModal">Sign In to Play</a>
+          <br>
+          <span>Don't have an account? <a data-toggle="modal" href="#signUpModal">Sign Up</a></span>
+        </div>
+      </div>
+
+      <!-- Tab Nav Bar -->
+      <div class="collapse" id="collapseTabs">
+        <ul class="nav nav-tabs justify-content-center" id="navTabs" role="tablist">
+          <li class="nav-item">
+            <a class="nav-link active" id="chooseAdventurerTab" data-toggle="tab" href="#chooseAdv" role="tab" aria-controls="choose" aria-selected="true">Choose Adventurer</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link disabled" id="goAdventuringTab" data-toggle="tab" href="#mainGame" role="tab" aria-controls="goAdventuring" aria-selected="false">Go Adventuring</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" id="userStatsTab" data-toggle="tab" href="#userStats" role="tab" aria-controls="user-stats" aria-selected="false">User Stats</a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle disabled" id="advStatsTab" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false">Adventurer Stats</a>
+            <div class="dropdown-menu scrollable-menu" id="advStatsTabDropdownContent">
+            </div>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Tab bar tabs -->
+      <div class="tab-content" id="myTabContent">
+        <!-- Choose Adventurer Tab Content -->
+        <div class="tab-pane fade show active" id="chooseAdv" role="tabpanel" aria-labelledby="choose-tab">
+        </div>
+
+        <!-- Main Game Tab Content -->
+        <div class="tab-pane fade" id="mainGame" role="tabpanel" aria-labelledby="play-tab">
+        </div>
+
+        <!-- User Stats Tab Content -->
+        <div class="tab-pane fade" id="userStats" role="tabpanel" aria-labelledby="user-stats-tab">
+        </div>
+
+        <!-- Adventurer Stats Tab Content -->
+        <div class="tab-pane fade" id="advStats" role="tabpanel" aria-labelledby="adv-stats-tab">
+        </div>
+      </div>
+
+      <div class="modal fade" id="signInModal" tabindex="-1" role="dialog" aria-labelledby="signInModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="signInModalLabel">Sign In</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class='form-horizontal' role="form" id='signIn'>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label class="control-label col-2" for="email">Email:</label>
+                    <div class="col-10">
+                      <input type="text" class="form-control" name="credentials[email]" placeholder="Enter email" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-2" for="pwd">Password:</label>
+                    <div class="col-10">
+                      <input type="password" class="form-control" name="credentials[password]" placeholder="Enter password" required>
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Sign In</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id='signUpModal' class='modal fade' role='dialog' tabindex='-1' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'>
+            <div class ="modal-header">
+              <h4 class="modal-title">Sign Up</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form class='form-horizontal' role="form" id='signUp'>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label class="control-label col-2" for="email">Email:</label>
+                    <div class="col-10">
+                      <input type="text" class="form-control" name="credentials[email]" placeholder="Enter email" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-2" for="pwd">Password:</label>
+                    <div class="col-10">
+                      <input type="password" class="form-control" name="credentials[password]" id="password" placeholder="Enter password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-2" for="pwd">Confirmation:</label>
+                    <div class="col-10">
+                      <input type="password" class="form-control" name="credentials[password_confirmation]" id="passwordConfirmation" placeholder="Password Confirmation" required>
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div id='changePasswordModal' class='modal fade' role='dialog' tabindex='-1' aria-hidden='true'>
+        <div class='modal-dialog' role='document'>
+          <div class='modal-content'>
+            <div class ="modal-header">
+              <h4 class="modal-title">Change Password</h4>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <form class='form-horizontal' role="form" id='changePassword'>
+              <div class="modal-body">
+                  <div class="form-group">
+                    <label class="control-label col-2" for="pwd">Old Password:</label>
+                    <div class="col-10">
+                      <input type="password" class="form-control" name = "passwords[old]" placeholder="Enter old password" required>
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-2" for="pwd">New Password:</label>
+                    <div class="col-10">
+                      <input type="password" class="form-control" name="passwords[new]" placeholder="Enter new password" required>
+                    </div>
+                  </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary" >Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="createAdventurerModal" tabindex="-1" role="dialog" aria-labelledby="createAdventurerModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="createAdventurerModalLabel">Create Adventurer</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <form class='form-horizontal' role="form" id='createAdventurer'>
+              <div class="modal-body">
+                <div class="form-group">
+                  <label class="control-label col-2" for="nameEntry">Name:</label>
+                  <div class="col-10">
+                    <input type="text" class="form-control" id="nameEntry" name="adventurer[name]" placeholder="Enter Name" required>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                <button type="submit" class="btn btn-primary">Start Adventure</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+
+      <div class="modal fade" id="confirmResetModal" tabindex="-1" role="dialog" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title">Reset User Account</h5>
+              <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body">
+              <p>Confirm that you want to delete all data on this account. This will permanently remove all adventurers and account statistics.</p>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-danger" id="resetAccount">Confirm Reset</button>
+              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
+          </div>
+        </div>
+      </div>
+      </body>
+</html>

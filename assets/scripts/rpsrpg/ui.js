@@ -94,6 +94,9 @@ const onShowAdventurerFailure = function () {
 
 const onResetAccountSuccess = function () {
   $('#chooseAdv').empty()
+  $('#mainGame').empty()
+  $('#chooseAdventurerTab').tab('show')
+  $('#goAdventuringTab').addClass('disabled')
   $('#confirmResetModal').modal('hide')
   greenNotification('Account was reset successfully')
 }
